@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}czystepanele.pl{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Specjaliści od czyszczenia paneli, okien i usług wysokościowych.">
+  <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,700&f[]=manrope@400,600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#000042',
+            accent: '#46A2DA',
+          },
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+            heading: ['Satoshi', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+
+  
+
+</head>
+
+<body class="bg-white text-gray-900 flex flex-col min-h-screen">
+
+<header class="fixed top-0 z-50 w-full bg-white shadow">
+  <nav class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+    <a href="{% url 'home' %}" class="flex items-center space-x-2">
+      <img src="{% static 'images/logo.png' %}" alt="Logo Czyste Panele" class="h-16 w-auto">
+      <span class="text-2xl font-bold text-primary hover:text-accent transition">czystepanele.pl</span>
+    </a>
+
+    <button id="menu-toggle" class="md:hidden p-2 flex items-center justify-center h-10 w-10" aria-label="Menu">
+      <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+    <ul class="hidden md:flex space-x-6 items-center font-medium">
+        <li><a href="{% url 'home' %}" class="hover:text-accent">Strona główna</a></li>
+        <li class="relative group">
+            <button class="hover:text-accent flex items-center gap-1">
+            Usługi
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+            </button>
+            <ul class="absolute left-0 mt-2 w-56 bg-white shadow-md rounded-md p-2 hidden group-hover:block transition-all duration-150 z-50">
+            <li><a href="{% url 'mycie-paneli' %}" class="block px-4 py-2 hover:bg-gray-100 rounded">Mycie paneli</a></li>
+            <li><a href="{% url 'mycie-okien' %}" class="block px-4 py-2 hover:bg-gray-100 rounded">Mycie okien</a></li>
+            <li><a href="{% url 'koszenie-trawnikow' %}" class="block px-4 py-2 hover:bg-gray-100 rounded">Koszenie trawników</a></li>
+            <li><a href="{% url 'uslugi-wysokosciowe' %}" class="block px-4 py-2 hover:bg-gray-100 rounded">Usługi wysokościowe</a></li>
+            <li><a href="{% url 'ptaki' %}" class="block px-4 py-2 hover:bg-gray-100 rounded">Zabezpieczenia przeciwko ptakom</a></li>
+            </ul>
+        </li>
+        <li><a href="{% url 'realizacje' %}" class="hover:text-accent">Realizacje</a></li>
+
+        <li><a href="{% url 'blog' %}" class="hover:text-accent">Blog</a></li>
+        <li><a href="{% url 'kontakt' %}" class="bg-primary text-white px-4 py-2 rounded hover:bg-accent transition">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <div id="mobile-menu" class="fixed top-0 right-0 h-full w-64 bg-white shadow-xl rounded-l-2xl transform translate-x-full opacity-0 transition-all duration-300 ease-in-out z-40 md:hidden">
+    <div class="flex justify-end items-center h-16 px-4">
+      <button id="menu-close" class="p-2 flex items-center justify-center h-10 w-10 text-primary hover:text-accent transition" aria-label="Zamknij menu">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="p-6 space-y-4 font-sans">
+      <a href="{% url 'home' %}" class="block menu-link">Strona główna</a>
+      <a href="{% url 'mycie-paneli' %}" class="block menu-link">Mycie paneli</a>
+      <a href="{% url 'mycie-okien' %}" class="block menu-link">Mycie okien</a>
+      <a href="{% url 'koszenie-trawnikow' %}" class="block menu-link">Koszenie trawników</a>
+      <a href="{% url 'uslugi-wysokosciowe' %}" class="block menu-link">Usługi wysokościowe</a>
+      <a href="{% url 'ptaki' %}" class="block menu-link">Zabezpieczenia przeciwko ptakom</a>
+      <a href="{% url 'blog' %}" class="block menu-link">Blog</a>
+      <a href="{% url 'kontakt' %}" class="block text-primary font-bold menu-link">Kontakt</a>
+    </div>
+  </div>
+
+
+</header>
+
+<main class="flex-grow max-w-7xl mx-auto px-4 py-6">
+  {% block content %}
+  {% endblock %}
+</main>
+
+<footer class="bg-primary text-white py-10">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 px-4 text-sm">
+    <div>
+      <h2 class="font-semibold text-lg mb-2">O nas</h2>
+      <p class="leading-relaxed">Specjalizujemy się w myciu paneli, okien oraz usługach wysokościowych. Działamy bezpiecznie, sprawnie i z gwarancją efektu.</p>
+    </div>
+    <div>
+      <h2 class="font-semibold text-lg mb-2">Nawigacja</h2>
+      <ul class="space-y-1">
+        <li><a href="{% url 'home' %}" class="hover:underline">Strona główna</a></li>
+        <li><a href="{% url 'mycie-paneli' %}" class="hover:underline">Mycie paneli</a></li>
+        <li><a href="{% url 'uslugi-wysokosciowe' %}" class="hover:underline">Usługi wysokościowe</a></li>
+        <li><a href="{% url 'kontakt' %}" class="hover:underline">Kontakt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="font-semibold text-lg mb-2">Kontakt</h2>
+      <address class="not-italic leading-relaxed">
+        tel: <a href="tel:+48123456789" class="hover:underline">+48 123 456 789</a><br>
+        e-mail: <a href="mailto:kontakt@czystepanele.pl" class="hover:underline">kontakt@czystepanele.pl</a><br>
+        Gdańsk, Polska
+      </address>
+    </div>
+  </div>
+  <div class="text-center text-xs mt-8">&copy; 2025 czystepanele.pl Wszelkie prawa zastrzeżone.</div>
+</footer>
+
+<script>
+  const toggleBtn = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const closeBtn = document.getElementById('menu-close');
+
+  function openMenu() {
+    mobileMenu.classList.remove('translate-x-full', 'opacity-0');
+    mobileMenu.classList.add('translate-x-0', 'opacity-100');
+  }
+
+  function closeMenu() {
+    mobileMenu.classList.remove('translate-x-0', 'opacity-100');
+    mobileMenu.classList.add('translate-x-full', 'opacity-0');
+  }
+
+  toggleBtn.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+
+  document.querySelectorAll('.menu-link').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+</script>
+
+</body>
+</html>
