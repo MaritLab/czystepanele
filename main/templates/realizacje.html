@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Realizacje | czystepanele.pl{% endblock %}
+
+{% block meta %}
+  <meta name="description" content="Zobacz nasze realizacje czyszczenia paneli fotowoltaicznych, elewacji i okien. Działamy w Trójmieście i okolicach – jakość, terminowość, zadowoleni klienci.">
+{% endblock %}
+
+{% block content %}
+
+<!-- SEKCJA: NAGŁÓWEK -->
+<section class="bg-white text-[#000042] py-24 px-6">
+  <div class="max-w-6xl mx-auto text-center">
+    <h1 class="text-4xl font-heading font-bold mb-6">Nasze realizacje</h1>
+    <p class="text-lg font-sans text-gray-700">
+      Zobacz efekty naszej pracy – od lśniących paneli po czyste elewacje. Wszystko udokumentowane!
+    </p>
+  </div>
+</section>
+
+<section class="bg-white py-16 px-6">
+  <div class="max-w-6xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+    
+    <!-- Kafelek 1 -->
+    <a href="mycie-paneli-realizacje.html" class="kafelek group relative block rounded-xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform duration-300">
+        <article class="h-48 md:h-56 flex items-center justify-center relative">
+
+            <!-- Obrazek -->
+            <img src="{% static 'images/hero2.jpg' %}" alt="Mycie paneli" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300" loading="lazy">
+
+            <!-- Ciemny overlay -->
+            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+
+            <!-- Tekst -->
+            <div class="relative z-10 px-4 text-center">
+            <h2 class="text-2xl font-semibold text-white drop-shadow-md">Mycie paneli</h2>
+            </div>
+
+        </article>
+    </a>
+    <!-- Kafelek 2 -->
+    <a href="mycie-okien-realizacje.html" class="kafelek group relative block rounded-xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform duration-300">
+        <article class="h-48 md:h-56 flex items-center justify-center relative">
+
+            <!-- Obrazek -->
+            <img src="{% static 'images/hero2.jpg' %}" alt="Mycie okien" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300" loading="lazy">
+
+            <!-- Ciemny overlay -->
+            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+
+            <!-- Tekst -->
+            <div class="relative z-10 px-4 text-center">
+            <h2 class="text-2xl font-semibold text-white drop-shadow-md">Mycie okien</h2>
+            </div>
+
+        </article>
+    </a>
+
+    <!-- Kafelek 3 -->
+    <a href="koszenie-trawnikow-realizacje.html" class="kafelek group relative block rounded-xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform duration-300">
+        <article class="h-48 md:h-56 flex items-center justify-center relative">
+
+            <!-- Obrazek -->
+            <img src="{% static 'images/hero2.jpg' %}" alt="Koszenie trawnika" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300" loading="lazy">
+
+            <!-- Ciemny overlay -->
+            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+
+            <!-- Tekst -->
+            <div class="relative z-10 px-4 text-center">
+            <h2 class="text-2xl font-semibold text-white drop-shadow-md">Koszenie trawników</h2>
+            </div>
+
+        </article>
+    </a>
+
+    <!-- Kafelek 4 -->
+    <a href="uslugi-wysokosciowe-realizacje.html" class="kafelek group relative block rounded-xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform duration-300">
+        <article class="h-48 md:h-56 flex items-center justify-center relative">
+
+            <!-- Obrazek -->
+            <img src="{% static 'images/hero2.jpg' %}" alt="Usługi wysokościowe" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300" loading="lazy">
+
+            <!-- Ciemny overlay -->
+            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+
+            <!-- Tekst -->
+            <div class="relative z-10 px-4 text-center">
+            <h2 class="text-2xl font-semibold text-white drop-shadow-md">Usługi wysokościowe</h2>
+            </div>
+
+        </article>
+    </a>
+
+    <!-- Kafelek 5 -->
+    <a href="zabezpieczenia-przeciwko-ptakom-realizacje.html" class="kafelek group relative block rounded-xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform duration-300">
+        <article class="h-48 md:h-56 flex items-center justify-center relative">
+
+            <!-- Obrazek -->
+            <img src="{% static 'images/hero2.jpg' %}" alt="Zabezpieczenia przeciwko ptakom" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300" loading="lazy">
+
+            <!-- Ciemny overlay -->
+            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+
+            <!-- Tekst -->
+            <div class="relative z-10 px-4 text-center">
+            <h2 class="text-2xl font-semibold text-white drop-shadow-md">Zabezpieczenia przeciwko ptakom</h2>
+            </div>
+
+        </article>
+    </a>
+
+    <!-- Kafelek 6 -->
+    <a href="pozostale-realizacje.html" class="kafelek group relative block rounded-xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform duration-300">
+        <article class="h-48 md:h-56 flex items-center justify-center relative">
+
+            <!-- Obrazek -->
+            <img src="{% static 'images/hero2.jpg' %}" alt="Zabezpieczenia przeciwko ptakom" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300" loading="lazy">
+
+            <!-- Ciemny overlay -->
+            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+
+            <!-- Tekst -->
+            <div class="relative z-10 px-4 text-center">
+            <h2 class="text-2xl font-semibold text-white drop-shadow-md">Pozostałe realizacje</h2>
+            </div>
+
+        </article>
+    </a>
+
+
+    
+  </div>
+</section>
+
+{% endblock %}
