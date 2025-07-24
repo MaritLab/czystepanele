@@ -52,9 +52,11 @@
   <div class="max-w-6xl mx-auto px-6">
     <h2 class="text-4xl font-bold mb-16 text-center text-[#000042]">Nasze usługi</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      <a href="/realizacje/mycie-paneli/" class="group block bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
+      
+      <!-- Mycie paneli -->
+      <a href="{% url 'mycie-paneli' %}" class="group block bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
         <div class="overflow-hidden">
-          <img src="{% static 'images/panele.jpg' %}" alt="Mycie paneli" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+          <img src="{% static 'images/panele.jpg' %}" alt="Mycie paneli fotowoltaicznych" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
         </div>
         <div class="p-6 text-center">
           <div class="text-3xl mb-2">🔋</div>
@@ -62,7 +64,9 @@
           <p class="text-sm text-gray-600 mt-2">Zwiększ wydajność instalacji słonecznej.</p>
         </div>
       </a>
-      <a href="/realizacje/mycie-okien/" class="group block bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
+
+      <!-- Mycie okien -->
+      <a href="{% url 'mycie-okien' %}" class="group block bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
         <div class="overflow-hidden">
           <img src="{% static 'images/okna.jpg' %}" alt="Mycie okien" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
         </div>
@@ -72,7 +76,9 @@
           <p class="text-sm text-gray-600 mt-2">Czyste okna, wyraźna różnica.</p>
         </div>
       </a>
-      <a href="/realizacje/koszenie-trawnikow/" class="group block bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
+
+      <!-- Koszenie trawników -->
+      <a href="{% url 'koszenie-trawnikow' %}" class="group block bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
         <div class="overflow-hidden">
           <img src="{% static 'images/trawa.jpg' %}" alt="Koszenie trawnika" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
         </div>
@@ -82,9 +88,58 @@
           <p class="text-sm text-gray-600 mt-2">Zadbaj o ogród bez wysiłku.</p>
         </div>
       </a>
+
+      <!-- Usługi wysokościowe -->
+      <a href="{% url 'uslugi-wysokosciowe' %}" class="group block bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
+        <div class="overflow-hidden">
+          <img src="{% static 'images/hero2.jpg' %}" alt="Usługi wysokościowe" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+        </div>
+        <div class="p-6 text-center">
+          <div class="text-3xl mb-2">🧗‍♂️</div>
+          <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">Usługi wysokościowe</h3>
+          <p class="text-sm text-gray-600 mt-2">Bezpiecznie i precyzyjnie – wszędzie tam, gdzie inni nie sięgają.</p>
+        </div>
+      </a>
+
+      <!-- Zabezpieczenia przed ptakami -->
+      <a href="{% url 'zabezpieczenia-przeciwko-ptakom' %}" class="group block bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
+        <div class="overflow-hidden">
+          <img src="{% static 'images/kolce.jpg' %}" alt="Zabezpieczenia przed ptakami" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+        </div>
+        <div class="p-6 text-center">
+          <div class="text-3xl mb-2">🕊️</div>
+          <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">Zabezpieczenia przed ptakami</h3>
+          <p class="text-sm text-gray-600 mt-2">Kolce, siatki i dyskretne rozwiązania na lata.</p>
+        </div>
+      </a>
+
+      <a href="/kontakt/" class="group block bg-[#000042] text-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
+  <div class="flex flex-col justify-center items-center p-10 h-full text-center">
+    
+    <!-- Ikonka -->
+    <div class="text-4xl mb-4 animate-bounce">💬</div>
+    
+    <!-- Nagłówek -->
+    <h3 class="text-2xl font-bold mb-2 group-hover:text-blue-300 transition-colors">
+      Nie widzisz swojej usługi?
+    </h3>
+    
+    <!-- Tekst -->
+    <p class="text-sm opacity-90 mb-4">Skontaktuj się z nami – postarany się pomóc!</p>
+    
+    <!-- Link CTA -->
+    <span class="inline-block mt-2 px-5 py-2 bg-white text-[#000042] font-semibold rounded-full transition hover:bg-blue-100 hover:scale-105">
+      Napisz do nas →
+    </span>
+
+  </div>
+</a>
+
+
     </div>
   </div>
 </section>
+
 
 <!-- OPINIE -->
 <section id="opinie" class="mt-10 bg-white">
