@@ -15,8 +15,8 @@ def mycie_okien(request):
 def koszenie_trawnikow(request):
     return render(request, 'koszenie-trawnikow.html')
 
-def ptaki(request):
-    return render(request, 'zabezpieczenie-przeciwko-ptakom.html')
+def zabezpieczenia_przeciwko_ptakom(request):
+    return render(request, 'zabezpieczenia-przeciwko-ptakom.html')
 
 def uslugi_wysokosciowe(request):
     return render(request, 'uslugi-wysokosciowe.html')
