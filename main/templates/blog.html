@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Blog | czystepanele.pl{% endblock %}
+
+{% block meta %}
+  <meta name="description" content="">
+{% endblock %}
+
+{% block content %}
+<section class="py-24 bg-gray-50" id="blog">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl font-bold text-[#000042] mb-12 text-center">Najnowsze na blogu</h2>
+
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      
+      <!-- KAFELEK WPISU -->
+      <a href="#" class="group block rounded-2xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-all duration-300">
+        <div class="overflow-hidden">
+          <img src="/static/images/okna.jpg" alt="Jak często myć panele?" loading="lazy"
+               class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <div class="p-6">
+          <p class="text-sm text-blue-600 mb-2">Fotowoltaika</p>
+          <h3 class="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+            Jak często myć panele, żeby nie tracić na energii?
+          </h3>
+          <p class="text-sm text-gray-600 mt-3">
+            Krótkie podsumowanie wpisu. Praktyczne porady.
+          </p>
+          <div class="mt-4 flex justify-between items-center text-sm text-gray-500">
+            <span>12 czerwca 2025</span>
+            <span>3 min czytania</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- KAFELEK WPISU -->
+      <a href="#" class="group block rounded-2xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-all duration-300">
+        <div class="overflow-hidden">
+          <img src="/static/images/okna.jpg" alt="Mycie okien bez smug" loading="lazy"
+               class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <div class="p-6">
+          <p class="text-sm text-blue-600 mb-2">Poradnik</p>
+          <h3 class="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+            Sekrety mycia okien bez smug – poznaj nasze metody
+          </h3>
+          <p class="text-sm text-gray-600 mt-3">
+            Lśniące okna bez wysiłku? Zdradzamy nasz sprawdzony system pracy.
+          </p>
+          <div class="mt-4 flex justify-between items-center text-sm text-gray-500">
+            <span>3 lipca 2025</span>
+            <span>2 min czytania</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- KAFELEK WPISU -->
+      <a href="#" class="group block rounded-2xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-all duration-300">
+        <div class="overflow-hidden">
+          <img src="/static/images/okna.jpg" alt="Koszenie trawnika latem" loading="lazy"
+               class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105">
+        </div>
+        <div class="p-6">
+          <p class="text-sm text-blue-600 mb-2">Ogród</p>
+          <h3 class="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+            Jak często kosić trawnik latem? Zasady i częste błędy
+          </h3>
+          <p class="text-sm text-gray-600 mt-3">
+            Regularne koszenie nie wystarczy – zobacz, kiedy i jak kosić, by nie spalić trawy w upale.
+          </p>
+          <div class="mt-4 flex justify-between items-center text-sm text-gray-500">
+            <span>9 lipca 2025</span>
+            <span>4 min czytania</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+   
+  </div>
+</section>
+
+{% endblock %}
