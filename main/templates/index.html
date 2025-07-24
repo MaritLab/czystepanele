@@ -1,172 +1,188 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Strona Główna{% endblock %}
+{% block title %}Czystepanele.pl - Profesjonalne usługi czyszczenia{% endblock %}
 
 {% block content %}
-<body class="m-0 p-0">
-  <section class="w-full min-h-screen bg-cover bg-center bg-no-repeat relative flex items-center justify-center" style="background-image: url('/static/images/hero2.jpg');">
-    <div class="absolute inset-0 bg-black/60"></div>
 
-    <div class="relative z-10 text-center text-white px-6">
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight drop-shadow-lg">
-        czystepanele.pl
-      </h1>
-      <p class="text-lg sm:text-xl md:text-2xl mb-8 drop-shadow-md max-w-3xl mx-auto">
-        Tam, gdzie liczy się przejrzystość.
-      </p>
-      <button class="relative overflow-hidden px-6 py-3 border border-[#000042] text-[#000042] bg-white font-semibold rounded-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
-        Skontaktuj się
-      </button>
-
-    </div>
-  </section>
-</body>
-
-
-
-
-<section id="uslugi" class="py-16 bg-gray-50">
-  <div class="max-w-6xl mx-auto px-4 xl:px-10 2xl:px-20">
-    <h2 class="text-4xl font-bold mb-16 text-[#000042] tracking-tight text-center">Nasze usługi</h2>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      
-      <a href="#" class="service-card bg-white shadow-lg rounded-2xl p-6 hover:scale-105 hover:-translate-y-1 hover:shadow-xl transition-transform duration-300">
-        <div class="w-full h-40 mb-4 overflow-hidden rounded-lg">
-          <img src="{% static 'images/panele.jpg' %}" alt="Mycie paneli fotowoltaicznych" loading="lazy" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold mb-2">Mycie paneli</h3>
-        <p class="text-gray-600 text-sm">Zadbaj o wydajność instalacji. Skutecznie i bezpiecznie czyścimy panele słoneczne.</p>
-      </a>
-
-      <a href="#" class="service-card bg-white shadow-lg rounded-2xl p-6 hover:scale-105 hover:-translate-y-1 hover:shadow-xl transition-transform duration-300">
-        <div class="w-full h-40 mb-4 overflow-hidden rounded-lg">
-          <img src="{% static 'images/okna.jpg' %}" alt="Mycie okien" loading="lazy" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold mb-2">Mycie okien</h3>
-        <p class="text-gray-600 text-sm">Lśniące okna bez smug – w domach, biurach i na wysokościach.</p>
-      </a>
-
-      <a href="#" class="service-card bg-white shadow-lg rounded-2xl p-6 hover:scale-105 hover:-translate-y-1 hover:shadow-xl transition-transform duration-300">
-        <div class="w-full h-40 mb-4 overflow-hidden rounded-lg">
-          <img src="{% static 'images/trawa.jpg' %}" alt="Koszenie trawnika" loading="lazy" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold mb-2">Koszenie trawników</h3>
-        <p class="text-gray-600 text-sm">Regularna pielęgnacja ogrodu? Zostaw to nam – precyzyjnie, szybko, czysto.</p>
-      </a>
-
-      <a href="#" class="service-card bg-white shadow-lg rounded-2xl p-6 hover:scale-105 hover:-translate-y-1 hover:shadow-xl transition-transform duration-300">
-        <div class="w-full h-40 mb-4 overflow-hidden rounded-lg">
-          <img src="{% static 'images/hero2.jpg' %}" alt="Prace wysokościowe" loading="lazy" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold mb-2">Usługi wysokościowe</h3>
-        <p class="text-gray-600 text-sm">Czyszczenie trudno dostępnych miejsc, dachów, rynien i elewacji.</p>
-      </a>
-
-      <a href="#" class="service-card bg-white shadow-lg rounded-2xl p-6 hover:scale-105 hover:-translate-y-1 hover:shadow-xl transition-transform duration-300">
-        <div class="w-full h-40 mb-4 overflow-hidden rounded-lg">
-          <img src="{% static 'images/kolce.jpg' %}" alt="Zabezpieczenia przed ptakami" loading="lazy" class="w-full h-full object-cover">
-        </div>
-        <h3 class="text-xl font-semibold mb-2">Zabezpieczenia przeciwko ptakom</h3>
-        <p class="text-gray-600 text-sm">Montaż kolców i systemów odstraszających. Efektywnie i estetycznie.</p>
-      </a>
-
-      <a href="#kontakt" class="service-card bg-[#000042] text-white shadow-xl rounded-2xl p-6 hover:scale-105 hover:-translate-y-1 hover:shadow-xl transition-transform duration-300 flex flex-col justify-center items-center text-center">
-        <h3 class="text-2xl font-bold mb-2">Zapytaj o ofertę</h3>
-        <p class="text-sm">Nie widzisz tego, czego potrzebujesz? Skontaktuj się z nami.</p>
-      </a>
-
-
+<!-- HERO SECTION -->
+<section class="w-full min-h-screen bg-cover bg-center bg-no-repeat relative flex items-center justify-center" style="background-image: url('{% static 'images/hero2.jpg' %}');">
+  <div class="absolute inset-0 bg-black/60"></div>
+  <div class="relative z-10 text-center text-white px-6 max-w-4xl">
+    <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6 drop-shadow-xl">czystepanele.pl</h1>
+    <p class="text-xl md:text-2xl mb-8 drop-shadow-md">Profesjonalne mycie paneli, okien i powierzchni na terenie północnej Polski</p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="{% url 'kontakt' %}" class="bg-white text-[#000042] px-6 py-3 rounded-full font-semibold hover:scale-105 transition">Umów termin</a>
+      <a href="#opinie" class="text-white underline hover:text-blue-300">Zobacz opinie (5/5⭐)</a>
     </div>
   </div>
 </section>
 
-<section class="py-24 bg-gray-50" id="dlaczego-wybrac">
-  <div class="max-w-6xl mx-auto px-4 text-center">
-    <h2 class="text-4xl font-bold mb-16 text-[#000042] tracking-tight">Dlaczego warto nas wybrać</h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
-      
-      <div class="p-6 bg-white rounded-2xl shadow-lg hover:scale-105 hover:shadow-xl transition-transform duration-300" data-aos="fade-up" data-aos-delay="200">
-        <div class="flex items-center justify-center h-16 w-16 bg-[#EEF2FF] text-[#4F46E5] rounded-full mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2l4-4M9 17H7a2 2 0 01-2-2V7a2 2 0 012-2h10a2 2 0 012 2v4" />
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold mb-2">Dokładność wykonania</h3>
-        <p class="text-gray-600 text-sm">Dbamy o każdy szczegół, pracując z najwyższą starannością i według sprawdzonych standardów.</p>
+<!-- JAK DZIALAMY -->
+<section class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <h2 class="text-4xl font-bold text-[#000042] mb-16">Jak działamy</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <div class="flex flex-col items-center text-gray-700">
+        <div class="text-3xl mb-4">1️⃣</div>
+        <h3 class="font-semibold text-lg mb-2">Kontakt i wycena</h3>
+        <p class="text-sm">Zadzwoń lub napisz. Odpowiadamy szybko.</p>
       </div>
-
-      <div class="p-6 bg-white rounded-2xl shadow-lg hover:scale-105 hover:shadow-xl transition-transform duration-300" data-aos="fade-up" data-aos-delay="200">
-        <div class="flex items-center justify-center h-16 w-16 bg-[#ECFDF5] text-[#059669] rounded-full mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 4v13m0-13a5 5 0 015 5v1a5 5 0 01-5 5m0-6a5 5 0 00-5-5v1a5 5 0 005 5" />
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold mb-2">Bezpieczne środki czystości</h3>
-        <p class="text-gray-600 text-sm">Stosujemy skuteczne, ale bezpieczne preparaty, które są przyjazne dla środowiska i domowników.</p>
+      <div class="flex flex-col items-center text-gray-700">
+        <div class="text-3xl mb-4">2️⃣</div>
+        <h3 class="font-semibold text-lg mb-2">Ustalamy termin</h3>
+        <p class="text-sm">Dostosowujemy się do Twoich potrzeb.</p>
       </div>
-
-      <div class="p-6 bg-white rounded-2xl shadow-lg hover:scale-105 hover:shadow-xl transition-transform duration-300" data-aos="fade-up" data-aos-delay="200">
-        <div class="flex items-center justify-center h-16 w-16 bg-[#EFF6FF] text-[#3B82F6] rounded-full mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.104 0 2-.896 2-2s-.896-2-2-2-2 .896-2 2 .896 2 2 2zm0 10s6-5.686 6-10a6 6 0 10-12 0c0 4.314 6 10 6 10z" />
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold mb-2">Działamy lokalnie</h3>
-        <p class="text-gray-600 text-sm">Obsługujemy klientów na terenie Trójmiasta i okolic, zapewniając szybki dojazd i elastyczne terminy.</p>
+      <div class="flex flex-col items-center text-gray-700">
+        <div class="text-3xl mb-4">3️⃣</div>
+        <h3 class="font-semibold text-lg mb-2">Czyszczenie</h3>
+        <p class="text-sm">Profesjonalny sprzęt i doświadczenie.</p>
       </div>
-
-      <div class="p-6 bg-white rounded-2xl shadow-lg hover:scale-105 hover:shadow-xl transition-transform duration-300" data-aos="fade-up" data-aos-delay="200">
-        <div class="flex items-center justify-center h-16 w-16 bg-[#FEF9C3] text-[#F59E0B] rounded-full mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold mb-2">Terminowość i organizacja</h3>
-        <p class="text-gray-600 text-sm">Zawsze realizujemy zlecenia zgodnie z ustalonym harmonogramem – bez opóźnień i zbędnych formalności.</p>
+      <div class="flex flex-col items-center text-gray-700">
+        <div class="text-3xl mb-4">4️⃣</div>
+        <h3 class="font-semibold text-lg mb-2">Satysfakcja</h3>
+        <p class="text-sm">Zadowolenie gwarantowane. I czysta robota.</p>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="mt-20 text-center hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="500">
+<!-- USLUGI -->
+<section id="uslugi" class="py-24 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl font-bold mb-16 text-center text-[#000042]">Nasze usługi</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <a href="/realizacje/mycie-paneli/" class="group block bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
+        <div class="overflow-hidden">
+          <img src="{% static 'images/panele.jpg' %}" alt="Mycie paneli" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+        </div>
+        <div class="p-6 text-center">
+          <div class="text-3xl mb-2">🔋</div>
+          <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">Mycie paneli</h3>
+          <p class="text-sm text-gray-600 mt-2">Zwiększ wydajność instalacji słonecznej.</p>
+        </div>
+      </a>
+      <a href="/realizacje/mycie-okien/" class="group block bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
+        <div class="overflow-hidden">
+          <img src="{% static 'images/okna.jpg' %}" alt="Mycie okien" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+        </div>
+        <div class="p-6 text-center">
+          <div class="text-3xl mb-2">🪟</div>
+          <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">Mycie okien</h3>
+          <p class="text-sm text-gray-600 mt-2">Czyste okna, wyraźna różnica.</p>
+        </div>
+      </a>
+      <a href="/realizacje/koszenie-trawnikow/" class="group block bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
+        <div class="overflow-hidden">
+          <img src="{% static 'images/trawa.jpg' %}" alt="Koszenie trawnika" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+        </div>
+        <div class="p-6 text-center">
+          <div class="text-3xl mb-2">🌱</div>
+          <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">Koszenie trawników</h3>
+          <p class="text-sm text-gray-600 mt-2">Zadbaj o ogród bez wysiłku.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- OPINIE -->
+<section id="opinie" class="mt-10 bg-white">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h2 class="text-4xl font-bold text-[#000042] mb-12">Co mówią nasi klienci</h2>
+    <div class="grid md:grid-cols-2 gap-10">
+      <div class="bg-gray-50 p-6 rounded-xl shadow text-left">
+        <p class="text-gray-700 mb-4 italic">
+            "Dziękujemy za profesjonalne wykonanie usługi. Dzięki temu nasze panele są bardziej wydajne. 
+            Ponadto zastosowane metody mycia są przyjezne dla środowiska. Miły kontaktowy człowiek z dużym zasobem wiedzy w dziedzinie , którą się zajmuje. Dziękujemy."
+        </p>
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold">M</div>
+          <div class="ml-4">
+            <p class="font-semibold text-sm">Małgorzata i Leszek</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-xl shadow text-left">
+        <p class="text-gray-700 mb-4 italic">
+          "Wykonawca jest słowny,terminowy i bardzo profesjonalny. Efekt jego pracy przerósł moje oczekiwania. Przyjemnością było współpracować z nim
+          "</p>
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold">J</div>
+          <div class="ml-4">
+            <p class="font-semibold text-sm">Jolanta</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-xl shadow text-left">
+        <p class="text-gray-700 mb-4 italic">
+          "Świetna współpraca. Pan Konrad super zorganizowany, dokładny, z pozytywną energią. Okna nawet po deszczu lśnią, bez smug ani zacieków. Na pewno jeszcze nie raz skorzystam."</p>
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold">I</div>
+          <div class="ml-4">
+            <p class="font-semibold text-sm">Izabela</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-xl shadow text-left">
+        <p class="text-gray-700 mb-4 italic">
+          Zlecenie mycia okien na klatce schodowej wykonane terminowo i dokładnie.
+        </p>
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold">W</div>
+          <div class="ml-4">
+            <p class="font-semibold text-sm">Wspólnota Mieszkaniowa</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 bg-white" id="opinie-oferteo">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    
+    <div class="inline-flex items-center gap-4 px-6 py-4 bg-[#F9FAFB] border border-gray-200 rounded-2xl shadow hover:shadow-md transition">
+      
+      <!-- Ikona gwiazdek -->
+      <div class="text-yellow-500 text-3xl">
+        ★★★★★
+      </div>
+
+      <!-- Treść -->
+      <div class="text-left">
+        <p class="text-lg font-semibold text-gray-800">Ocena 5.0 / 5.0 na Oferteo</p>
+        <p class="text-sm text-gray-500">Na podstawie opinii klientów</p>
+      </div>
+
+      <!-- CTA -->
       <a href="https://www.oferteo.pl/czystepanele-pl-mycie-okien-i-instalacji-fotowoltaicznych-konrad-kusajda/firma/5818381" target="_blank" rel="noopener noreferrer"
-        class="inline-block bg-[#000042] hover:bg-[#1E3A8A] text-white font-semibold text-base md:text-lg py-4 px-10 rounded-full shadow-md hover:shadow-lg transition duration-300">
-        Sprawdź opinie na <span class="font-bold">Oferteo.pl</span>
+        class="ml-auto bg-[#000042] hover:bg-[#1E3A8A] text-white text-sm font-medium px-5 py-2 rounded-full transition">
+        Zobacz opinie
       </a>
     </div>
 
   </div>
 </section>
 
-
-<section class="py-24 bg-gray-50" id="realizacje">
+<!-- REALIZACJE -->
+<section class="py-24 bg-gray-100" id="realizacje">
   <div class="max-w-4xl mx-auto px-6 text-center">
     <h2 class="text-4xl font-bold mb-6">Zrealizowane projekty</h2>
-    <p class="text-lg text-gray-700 mb-10">
-      Sprawdź efekty naszej pracy – zdjęcia mówią więcej niż słowa.
-    </p>
-    <a href="{% url 'realizacje' %}" class="inline-block bg-[#000042] hover:bg-[#46A2DA] text-white font-semibold py-4 px-8 rounded-xl transition duration-300">
+    <p class="text-lg text-gray-700 mb-10">Zobacz efekty naszej pracy – przed i po czyszczeniu.</p>
+    <a href="{% url 'realizacje' %}" class="inline-block bg-[#000042] hover:bg-[#1E3A8A] hover:scale-105 text-white font-semibold py-4 px-10 rounded-full shadow-md transition duration-300">
       Galeria realizacji
     </a>
   </div>
 </section>
 
+<!-- CTA FINAL -->
 <section class="py-24 bg-[#000042] text-white text-center">
   <div class="max-w-3xl mx-auto px-6">
-    <h2 class="text-4xl font-bold mb-6">Postaw na doświadczenie i jakość</h2>
-    <p class="text-lg mb-8">
-      Obsługujemy klientów indywidualnych i firmy, zapewniając kompleksowe usługi. 
-      Poznaj naszą firmę bliżej i sprawdź, jak możemy pomóc w utrzymaniu Twojej przestrzeni w idealnym stanie.
-    </p>
+    <h2 class="text-4xl font-bold mb-6">Gotowy na czystość?</h2>
+    <p class="text-lg mb-8">Zostaw dane, a my zajmiemy się resztą. Profesjonalnie, lokalnie, na czas.</p>
     <a href="{% url 'kontakt' %}" class="inline-block bg-[#46A2DA] hover:bg-white hover:text-[#000042] text-white font-semibold py-4 px-8 rounded-xl transition duration-300">
-      Dowiedz się więcej i skontaktuj się z nami
+      Skontaktuj się z nami
     </a>
   </div>
 </section>
-
-
-
-
 
 {% endblock %}
