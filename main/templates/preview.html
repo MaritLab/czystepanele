@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Szczegóły realizacji | czystepanele.pl{% endblock %}
+
+{% block meta %}
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Zobacz szczegóły jednej z naszych realizacji czyszczenia paneli – opis, zdjęcia przed i po, data wykonania oraz więcej.">
+{% endblock %}
+
+{% block content %}
+<section class="max-w-6xl mx-auto pt-32 sm:pt-40 px-4 sm:px-10 lg:px-16">
+  <article id="project-preview" class="animate-fadeIn opacity-0 transition-opacity duration-700">
+    <header class="mb-8">
+      <h1 id="preview-title" class="text-4xl font-extrabold text-gray-900 tracking-tight mb-2">Wczytywanie...</h1>
+      <time id="preview-date" class="block text-sm text-gray-500"></time>
+    </header>
+
+    <section id="preview-gallery" class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10">
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold text-gray-800 mb-3">Opis realizacji</h2>
+      <p id="preview-description" class="text-lg text-gray-700 leading-relaxed"></p>
+    </section>
+  </article>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+  <img id="lightbox-img" src="" alt="Podgląd zdjęcia" class="max-w-full max-h-full rounded-lg shadow-xl">
+  <button id="lightbox-close" class="absolute top-6 right-6 text-white text-3xl font-bold">&times;</button>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const params = window.location.pathname.split("/").filter(Boolean);
+    const idPart = params.find(p => /^\d+/.test(p));
+    const projectId = idPart ? parseInt(idPart) : null;
+
+    const titleEl = document.getElementById("preview-title");
+    const descEl = document.getElementById("preview-description");
+    const dateEl = document.getElementById("preview-date");
+    const galleryEl = document.getElementById("preview-gallery");
+    const articleEl = document.getElementById("project-preview");
+
+    if (!projectId) {
+      titleEl.textContent = "Nie znaleziono projektu.";
+      return;
+    }
+
+    fetch(`/get_project_details/${projectId}/`)
+      .then(res => res.json())
+      .then(data => {
+        titleEl.textContent = data.title;
+        descEl.textContent = data.description;
+        dateEl.textContent = new Date(data.date).toLocaleDateString('pl-PL', {
+          year: 'numeric', month: 'long', day: 'numeric'
+        });
+
+        data.images.forEach(src => {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = `Zdjęcie z realizacji: ${data.title}`;
+          img.className = "w-full h-auto aspect-video object-cover rounded-xl shadow-lg cursor-zoom-in hover:scale-[1.02] transition-transform duration-300";
+          img.loading = "lazy";
+          img.addEventListener("click", () => {
+            document.getElementById("lightbox-img").src = src;
+            document.getElementById("lightbox").classList.remove("hidden");
+          });
+          galleryEl.appendChild(img);
+        });
+
+        requestAnimationFrame(() => {
+          articleEl.classList.remove("opacity-0");
+        });
+      })
+      .catch(() => {
+        titleEl.textContent = "Błąd podczas ładowania projektu.";
+      });
+
+    // Obsługa lightboxa
+    const lightbox = document.getElementById("lightbox");
+    const closeBtn = document.getElementById("lightbox-close");
+
+    closeBtn.addEventListener("click", () => {
+      lightbox.classList.add("hidden");
+    });
+
+    lightbox.addEventListener("click", e => {
+      if (e.target.id === "lightbox") {
+        lightbox.classList.add("hidden");
+      }
+    });
+  });
+</script>
+{% endblock %}
