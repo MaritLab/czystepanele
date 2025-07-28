@@ -9,6 +9,8 @@ urlpatterns = [
     path('koszenie-trawnikow/', views.koszenie_trawnikow, name='koszenie-trawnikow'),
     path('zabezpieczenia-przeciwko-ptakom/', views.zabezpieczenia_przeciwko_ptakom, name='zabezpieczenia-przeciwko-ptakom'),
     path('uslugi-wysokosciowe/', views.uslugi_wysokosciowe, name='uslugi-wysokosciowe'),
-    path('realizacje/', views.realizacje, name='realizacje'),
+    path('realizacje/', views.gallery_view, name='realizacje'),
     path('blog/', views.blog, name='blog'),
+    path('get_project_details/<int:project_id>/', views.get_project_details, name='get_project_details'),
+    path('realizacja/<int:project_id>-<slug:slug>/', views.preview_page, name='preview_slug'),
 ]
