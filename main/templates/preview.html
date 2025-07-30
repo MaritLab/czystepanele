@@ -9,18 +9,19 @@
 {% endblock %}
 
 {% block content %}
-<section class="max-w-6xl mx-auto pt-32 sm:pt-40 px-4 sm:px-10 lg:px-16">
+<section class="max-w-6xl mx-auto pt-16 sm:pt-24 px-4 sm:px-10 lg:px-16 pb-20">
   <article id="project-preview" class="animate-fadeIn opacity-0 transition-opacity duration-700">
-    <header class="mb-8">
-      <h1 id="preview-title" class="text-4xl font-extrabold text-gray-900 tracking-tight mb-2">Wczytywanie...</h1>
+    <header class="mb-10 border-b pb-4">
+      <h1 id="preview-title" class="text-4xl font-extrabold text-gray-900 tracking-tight mb-1">Wczytywanie...</h1>
       <time id="preview-date" class="block text-sm text-gray-500"></time>
     </header>
 
-    <section id="preview-gallery" class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10">
+    <section id="preview-gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+      <!-- Dynamiczne zdjęcia -->
     </section>
 
-    <section>
-      <h2 class="text-2xl font-semibold text-gray-800 mb-3">Opis realizacji</h2>
+    <section class="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-sm">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">Opis realizacji</h2>
       <p id="preview-description" class="text-lg text-gray-700 leading-relaxed"></p>
     </section>
   </article>
@@ -28,6 +29,8 @@
 
 <!-- Lightbox -->
 <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+  <button id="lightbox-prev" class="absolute left-4 text-white text-4xl font-bold z-50">&#8592;</button>
+  <button id="lightbox-next" class="absolute right-4 text-white text-4xl font-bold z-50">&#8594;</button>
   <img id="lightbox-img" src="" alt="Podgląd zdjęcia" class="max-w-full max-h-full rounded-lg shadow-xl">
   <button id="lightbox-close" class="absolute top-6 right-6 text-white text-3xl font-bold">&times;</button>
 </div>
@@ -44,6 +47,15 @@
     const galleryEl = document.getElementById("preview-gallery");
     const articleEl = document.getElementById("project-preview");
 
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const closeBtn = document.getElementById("lightbox-close");
+    const prevBtn = document.getElementById("lightbox-prev");
+    const nextBtn = document.getElementById("lightbox-next");
+
+    let images = [];
+    let currentIndex = 0;
+
     if (!projectId) {
       titleEl.textContent = "Nie znaleziono projektu.";
       return;
@@ -54,21 +66,30 @@
       .then(data => {
         titleEl.textContent = data.title;
         descEl.textContent = data.description;
-        dateEl.textContent = new Date(data.date).toLocaleDateString('pl-PL', {
-          year: 'numeric', month: 'long', day: 'numeric'
-        });
 
-        data.images.forEach(src => {
+        const rawDate = new Date(data.date);
+        const options = { year: 'numeric', month: 'long' };
+        dateEl.textContent = rawDate.toLocaleDateString('pl-PL', options);
+
+        images = data.images;
+
+        data.images.forEach((src, index) => {
+          const wrapper = document.createElement('div');
+          wrapper.className = "overflow-hidden rounded-xl shadow-md transition-transform transform hover:scale-105";
+
           const img = document.createElement('img');
           img.src = src;
           img.alt = `Zdjęcie z realizacji: ${data.title}`;
-          img.className = "w-full h-auto aspect-video object-cover rounded-xl shadow-lg cursor-zoom-in hover:scale-[1.02] transition-transform duration-300";
+          img.className = "w-full h-auto aspect-video object-cover cursor-zoom-in";
           img.loading = "lazy";
+
           img.addEventListener("click", () => {
-            document.getElementById("lightbox-img").src = src;
-            document.getElementById("lightbox").classList.remove("hidden");
+            currentIndex = index;
+            openLightbox(currentIndex);
           });
-          galleryEl.appendChild(img);
+
+          wrapper.appendChild(img);
+          galleryEl.appendChild(wrapper);
         });
 
         requestAnimationFrame(() => {
@@ -79,19 +100,51 @@
         titleEl.textContent = "Błąd podczas ładowania projektu.";
       });
 
-    // Obsługa lightboxa
-    const lightbox = document.getElementById("lightbox");
-    const closeBtn = document.getElementById("lightbox-close");
+    function openLightbox(index) {
+      lightboxImg.src = images[index];
+      lightbox.classList.remove("hidden");
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex];
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex];
+    }
 
     closeBtn.addEventListener("click", () => {
       lightbox.classList.add("hidden");
     });
 
-    lightbox.addEventListener("click", e => {
-      if (e.target.id === "lightbox") {
+    prevBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      showPrev();
+    });
+
+    nextBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      showNext();
+    });
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) {
         lightbox.classList.add("hidden");
+      }
+    });
+
+    // Obsługa klawiatury
+    document.addEventListener("keydown", (e) => {
+      if (!lightbox.classList.contains("hidden")) {
+        if (e.key === "ArrowLeft") showPrev();
+        if (e.key === "ArrowRight") showNext();
+        if (e.key === "Escape") lightbox.classList.add("hidden");
       }
     });
   });
 </script>
+
+
 {% endblock %}

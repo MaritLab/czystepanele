@@ -2,10 +2,21 @@ from django.shortcuts import render
 from .models import Category
 from django.http import JsonResponse, Http404
 from .models import Project
-
+import random
 
 def index(request):
-    return render(request, 'index.html')
+    hero_images = [
+        'images/mycie-okien-mercedes.webp',
+        'images/hero.jpg',
+        'images/hero2.jpg',
+        'images/kolce.jpg',
+        'images/okna.jpg',
+    ]
+    selected_image = random.choice(hero_images)
+    return render(request, 'index.html', {
+        'background_image' : selected_image
+    })
+    
 
 def kontakt(request):
     return render(request, 'kontakt.html')
@@ -19,8 +30,8 @@ def mycie_okien(request):
 def koszenie_trawnikow(request):
     return render(request, 'koszenie-trawnikow.html')
 
-def zabezpieczenia_przeciwko_ptakom(request):
-    return render(request, 'zabezpieczenia-przeciwko-ptakom.html')
+def zabezpieczenia_przed_ptakami(request):
+    return render(request, 'zabezpieczenia-przed-ptakami.html')
 
 def uslugi_wysokosciowe(request):
     return render(request, 'uslugi-wysokosciowe.html')
@@ -44,10 +55,11 @@ def get_project_details(request, project_id):
     data = {
         'title': project.title,
         'description': project.description,
-        'date': project.date.strftime('%d.%m.%Y'),
+        'date': project.date.strftime("%Y-%m-%d"),
         'images': [img.image.url for img in project.images.all()]
     }
     return JsonResponse(data)
 
 def preview_page(request, project_id, slug):
     return render(request, 'preview.html')
+

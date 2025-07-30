@@ -1,16 +1,22 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="{{ LANGUAGE_CODE|default:"pl" }}">
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}czystepanele.pl{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Specjaliści od czyszczenia paneli, okien i usług wysokościowych.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="czystepanele.pl">
+
+  <link rel="icon" href="{% static 'images/favicon.ico' %}" sizes="any">
   <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+
+  <link rel="preload" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,700&f[]=manrope@400,600,700&display=swap" as="style">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,700&f[]=manrope@400,600,700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -28,51 +34,56 @@
       }
     }
   </script>
-
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+</script>
 
 </head>
 
 <body class="bg-white text-gray-900 flex flex-col min-h-screen">
 
+<!-- Overlay dla menu mobilnego -->
+<div id="menu-overlay" class="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-40 md:hidden"></div>
+
 <header class="fixed top-0 z-50 w-full bg-white shadow">
-  <nav class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+  <nav class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3" role="navigation" aria-label="Główne menu">
     <a href="{% url 'index' %}" class="flex items-center space-x-2">
-      <img src="{% static 'images/logo.png' %}" alt="Logo Czyste Panele" class="h-16 w-auto">
+      <img src="{% static 'images/logo.png' %}" alt="Logo Czyste Panele" class="h-16 w-auto" loading="lazy">
       <span class="text-2xl font-bold text-primary hover:text-accent transition">czystepanele.pl</span>
     </a>
 
-    <button id="menu-toggle" class="md:hidden p-2 flex items-center justify-center h-10 w-10" aria-label="Menu">
+    <button id="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 flex items-center justify-center h-10 w-10">
       <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
       </svg>
     </button>
-    <ul class="hidden md:flex space-x-6 items-center font-medium">
-        <li><a href="{% url 'index' %}" class="hover:text-accent">Strona główna</a></li>
-        <li class="relative group">
-            <button class="hover:text-accent flex items-center gap-1">
-            Usługi
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
-            </button>
-            <ul class="absolute left-0 top-full w-56 bg-white shadow-md rounded-md p-2 opacity-0 scale-y-95 group-hover:opacity-100 group-hover:scale-y-100 origin-top pointer-events-none group-hover:pointer-events-auto transition-all duration-500 ease-in-out z-50">
-            <li><a href="{% url 'mycie-paneli' %}" class="block px-4 py-2 hover:bg-gray-100 rounded">Mycie paneli</a></li>
-            <li><a href="{% url 'mycie-okien' %}" class="block px-4 py-2 hover:bg-gray-100 rounded">Mycie okien</a></li>
-            <li><a href="{% url 'koszenie-trawnikow' %}" class="block px-4 py-2 hover:bg-gray-100 rounded">Koszenie trawników</a></li>
-            <li><a href="{% url 'uslugi-wysokosciowe' %}" class="block px-4 py-2 hover:bg-gray-100 rounded">Usługi wysokościowe</a></li>
-            <li><a href="{% url 'zabezpieczenia-przeciwko-ptakom' %}" class="block px-4 py-2 hover:bg-gray-100 rounded">Zabezpieczenia przeciwko ptakom</a></li>
-            </ul>
-        </li>
-        <li><a href="{% url 'realizacje' %}" class="hover:text-accent">Realizacje</a></li>
 
-        <li><a href="{% url 'blog' %}" class="hover:text-accent">Blog</a></li>
-        <li><a href="{% url 'kontakt' %}" class="bg-primary text-white px-4 py-2 rounded hover:bg-accent transition">Kontakt</a></li>
+    <ul class="hidden md:flex space-x-6 items-center font-medium">
+      <li><a href="{% url 'index' %}" class="hover:text-accent">Strona główna</a></li>
+      <li class="relative group">
+        <button class="hover:text-accent flex items-center gap-1">
+          Usługi
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <ul class="absolute left-0 top-full w-56 bg-white shadow-md rounded-md p-2 opacity-0 scale-y-95 group-hover:opacity-100 group-hover:scale-y-100 origin-top pointer-events-none group-hover:pointer-events-auto transition-all duration-500 ease-in-out z-50">
+          <li><a href="{% url 'mycie-paneli' %}" class="block px-4 py-2 hover:bg-accent/10 rounded">Mycie paneli</a></li>
+          <li><a href="{% url 'mycie-okien' %}" class="block px-4 py-2 hover:bg-accent/10 rounded">Mycie okien</a></li>
+          <li><a href="{% url 'koszenie-trawnikow' %}" class="block px-4 py-2 hover:bg-accent/10 rounded">Koszenie trawników</a></li>
+          <li><a href="{% url 'uslugi-wysokosciowe' %}" class="block px-4 py-2 hover:bg-accent/10 rounded">Usługi wysokościowe</a></li>
+          <li><a href="{% url 'zabezpieczenia-przed-ptakami' %}" class="block px-4 py-2 hover:bg-accent/10 rounded">Zabezpieczenia przed ptakami</a></li>
+        </ul>
+      </li>
+      <li><a href="{% url 'realizacje' %}" class="hover:text-accent">Realizacje</a></li>
+      <li><a href="{% url 'blog' %}" class="hover:text-accent">Blog</a></li>
+      <li><a href="{% url 'kontakt' %}" class="bg-primary text-white px-4 py-2 rounded hover:bg-accent transition">Kontakt</a></li>
     </ul>
   </nav>
 
   <div id="mobile-menu" class="fixed top-0 right-0 h-full w-72 max-w-full bg-white shadow-2xl rounded-l-2xl transform translate-x-full opacity-0 transition-transform transition-opacity duration-300 ease-in-out z-50 md:hidden flex flex-col">
-  
     <div class="flex items-center justify-between h-16 px-6 border-b border-gray-200">
       <span class="text-xl font-bold text-primary">Menu</span>
       <button id="menu-close" class="p-2 text-primary hover:text-accent transition" aria-label="Zamknij menu">
@@ -81,66 +92,76 @@
         </svg>
       </button>
     </div>
-
     <div class="p-6 space-y-4 font-sans">
-    {% for item in menu_links %}
-      <a href="{% url item.1 %}" class="block menu-link text-gray-800 hover:text-accent font-medium">
-        {{ item.0 }}
-      </a>
-    {% endfor %}
+      {% for item in menu_links %}
+        <a href="{% url item.1 %}" class="block menu-link text-gray-800 hover:text-accent font-medium">
+          {{ item.0 }}
+        </a>
+      {% endfor %}
     </div>
-</div>
-
-
-
+  </div>
 </header>
 
-<main class="w-full">
-  {% block content %}
-  {% endblock %}
+<main class="w-full pt-16">
+  {% block content %}{% endblock %}
 </main>
 
-<footer class="bg-primary text-white py-10">
+<footer class="bg-primary text-white py-10 mt-auto">
   <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 px-4 text-sm">
     <div>
       <h2 class="font-semibold text-lg mb-2">O nas</h2>
-      <p class="leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+      <p class="leading-relaxed">Jesteśmy specjalistami w myciu paneli fotowoltaicznych, okien oraz realizacji usług wysokościowych. Stawiamy na jakość, bezpieczeństwo i nowoczesny sprzęt.</p>
     </div>
     <div>
       <h2 class="font-semibold text-lg mb-2">Nawigacja</h2>
       <ul class="space-y-1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+        <li><a href="{% url 'index' %}" class="hover:underline">Strona główna</a></li>
+        <li><a href="{% url 'realizacje' %}" class="hover:underline">Realizacje</a></li>
+        <li><a href="{% url 'blog' %}" class="hover:underline">Blog</a></li>
+        <li><a href="{% url 'kontakt' %}" class="hover:underline">Kontakt</a></li>
       </ul>
     </div>
     <div>
       <h2 class="font-semibold text-lg mb-2">Kontakt</h2>
       <address class="not-italic leading-relaxed">
-        tel: <a href="tel:+48123456789" class="hover:underline">+48 737 188 722</a><br>
-        e-mail: <a href="mailto:kontakt@czystepanele.pl" class="hover:underline">biuro@czystepanele.pl</a><br>
+        tel: <a href="tel:+48123456789" class="hover:underline">+48 123 456 789</a><br>
+        e-mail: <a href="mailto:biuro@cprzyklad.pl" class="hover:underline">biuro@przyklad.pl</a><br>
         Gdańsk, Polska
       </address>
     </div>
   </div>
-  <div class="text-center text-xs mt-8">&copy; 2025 czystepanele.pl Wszelkie prawa zastrzeżone.</div>
+  <div class="text-center text-xs mt-8">&copy; 2025 czystepanele.pl. Wszelkie prawa zastrzeżone.</div>
 </footer>
 
 <script>
   const toggleBtn = document.getElementById('menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   const closeBtn = document.getElementById('menu-close');
+  const overlay = document.getElementById('menu-overlay');
 
   function openMenu() {
     mobileMenu.classList.remove('translate-x-full', 'opacity-0');
     mobileMenu.classList.add('translate-x-0', 'opacity-100');
+
+    overlay.classList.remove('opacity-0', 'pointer-events-none');
+    overlay.classList.add('opacity-100', 'pointer-events-auto', 'backdrop-blur-sm');
+
+    toggleBtn.setAttribute('aria-expanded', 'true');
   }
 
   function closeMenu() {
     mobileMenu.classList.remove('translate-x-0', 'opacity-100');
     mobileMenu.classList.add('translate-x-full', 'opacity-0');
+
+    overlay.classList.remove('opacity-100', 'pointer-events-auto', 'backdrop-blur-sm');
+    overlay.classList.add('opacity-0', 'pointer-events-none');
+
+    toggleBtn.setAttribute('aria-expanded', 'false');
   }
 
   toggleBtn.addEventListener('click', openMenu);
   closeBtn.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
 
   document.querySelectorAll('.menu-link').forEach(link => {
     link.addEventListener('click', closeMenu);
