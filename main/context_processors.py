@@ -6,7 +6,8 @@ def global_menu_links(request):
             ("Mycie okien", "mycie-okien"),
             ("Koszenie trawników", "koszenie-trawnikow"),
             ("Usługi wysokościowe", "uslugi-wysokosciowe"),
-            ("Zabezpieczenia przeciwko ptakom", "zabezpieczenia-przeciwko-ptakom"),
+            ("Zabezpieczenia przed ptakami", "zabezpieczenia-przed-ptakami"),
+            ("Realizacje", "realizacje"),
             ("Blog", "blog"),
             ("Kontakt", "kontakt"),
         ]

@@ -11,7 +11,7 @@
 <section class="relative bg-white pt-36 sm:pt-40 px-4 sm:px-10 lg:px-16">
   <div class="max-w-7xl mx-auto">
 
-    <!-- 🔹 FILTRY KATEGORII -->
+    <!-- 🔹 FILTRY KATEGORII I SORTOWANIE -->
     <div class="flex flex-wrap justify-center gap-3 mb-10">
       <button class="category-filter bg-gray-900 text-white px-4 py-2 rounded-full hover:bg-gray-800 font-medium" data-category-id="all">
         Wszystkie
@@ -21,22 +21,30 @@
           {{ category.name }}
         </button>
       {% endfor %}
+
+      <!-- 🔸 Sortowanie po dacie -->
+      <div class="flex items-center gap-2 ml-6">
+        <span class="text-gray-700 font-medium">Sortuj wg daty:</span>
+        <button id="sort-desc" class="bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300">Od najnowszych</button>
+        <button id="sort-asc" class="bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300">Od najstarszych</button>
+      </div>
     </div>
 
     <!-- 🔹 GALERIA PROJEKTÓW -->
     <div id="project-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {% for category in categories %}
         {% for project in category.projects.all %}
-          <a href="{{ project.get_absolute_url }}" target="_blank"
+          <a href="{{ project.get_absolute_url }}" 
              class="project-card block bg-white rounded-xl shadow hover:shadow-lg overflow-hidden transition-all"
-             data-category-id="{{ category.id }}">
+             data-category-id="{{ category.id }}"
+             data-date="{{ project.date|date:'Y-m-d' }}">
             <div class="relative w-full h-48">
               <img src="{{ project.main_image.url }}" alt="{{ project.title }}" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
             </div>
             <div class="p-4">
               <h3 class="text-lg font-semibold text-gray-900">{{ project.title }}</h3>
               <p class="text-sm text-gray-700">{{ project.company_name }}</p>
-              <p class="text-sm text-gray-500">{{ project.location }} &bull; {{ project.date|date:"d.m.Y" }}</p>
+              <p class="text-sm text-gray-500">{{ project.location }} &bull; {{ project.date|date:"m.Y" }}</p>
             </div>
           </a>
         {% endfor %}
@@ -60,5 +68,29 @@
       });
     });
   });
+
+  // 🔹 Sortowanie projektów po dacie
+  const sortAscBtn = document.getElementById('sort-asc');
+  const sortDescBtn = document.getElementById('sort-desc');
+  const projectGrid = document.getElementById('project-grid');
+
+  function sortProjects(ascending = true) {
+    const cards = Array.from(projectGrid.querySelectorAll('.project-card'));
+    cards.sort((a, b) => {
+      const dateA = new Date(a.getAttribute('data-date'));
+      const dateB = new Date(b.getAttribute('data-date'));
+      return ascending ? dateA - dateB : dateB - dateA;
+    });
+    cards.forEach(card => projectGrid.appendChild(card));
+  }
+
+  sortAscBtn.addEventListener('click', () => sortProjects(true));
+  sortDescBtn.addEventListener('click', () => sortProjects(false));
+
+  // 🔹 Domyślnie sortuj malejąco (najnowsze pierwsze)
+  document.addEventListener('DOMContentLoaded', () => {
+    sortProjects(false);
+  });
+
 </script>
 {% endblock %}

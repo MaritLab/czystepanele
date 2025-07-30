@@ -6,13 +6,13 @@
 {% block content %}
 
 <!-- HERO SECTION -->
-<section class="w-full min-h-screen bg-cover bg-center bg-no-repeat relative flex items-center justify-center" style="background-image: url('{% static 'images/hero2.jpg' %}');">
+<section class="w-full min-h-screen bg-cover bg-center bg-no-repeat relative flex items-center justify-center" style="background-image: url('{% static background_image %}');">
   <div class="absolute inset-0 bg-black/60"></div>
   <div class="relative z-10 text-center text-white px-6 max-w-4xl">
     <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6 drop-shadow-xl">czystepanele.pl</h1>
     <p class="text-xl md:text-2xl mb-8 drop-shadow-md">Profesjonalne mycie paneli, okien i powierzchni na terenie północnej Polski</p>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="{% url 'kontakt' %}" class="bg-white text-[#000042] px-6 py-3 rounded-full font-semibold hover:scale-105 transition">Umów termin</a>
+      <a href="{% url 'kontakt' %}" class="bg-white text-[#000042] px-6 py-3 rounded-full font-semibold hover:scale-105">Umów termin</a>
       <a href="#opinie" class="text-white underline hover:text-blue-300">Zobacz opinie (5/5⭐)</a>
     </div>
   </div>
@@ -23,32 +23,32 @@
   <div class="max-w-6xl mx-auto px-6 text-center">
     <h2 class="text-4xl font-bold text-[#000042] mb-16">Jak działamy</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
-      <div class="flex flex-col items-center text-gray-700">
+      <div class="flex flex-col items-center text-gray-700 gsap-section">
         <div class="text-3xl mb-4">1️⃣</div>
         <h3 class="font-semibold text-lg mb-2">Kontakt i wycena</h3>
         <p class="text-sm">Zadzwoń lub napisz. Odpowiadamy szybko.</p>
       </div>
-      <div class="flex flex-col items-center text-gray-700">
+      <div class="flex flex-col items-center text-gray-700 gsap-section">
         <div class="text-3xl mb-4">2️⃣</div>
         <h3 class="font-semibold text-lg mb-2">Ustalamy termin</h3>
         <p class="text-sm">Dostosowujemy się do Twoich potrzeb.</p>
       </div>
-      <div class="flex flex-col items-center text-gray-700">
+      <div class="flex flex-col items-center text-gray-700 gsap-section">
         <div class="text-3xl mb-4">3️⃣</div>
         <h3 class="font-semibold text-lg mb-2">Czyszczenie</h3>
         <p class="text-sm">Profesjonalny sprzęt i doświadczenie.</p>
       </div>
-      <div class="flex flex-col items-center text-gray-700">
+      <div class="flex flex-col items-center text-gray-700 gsap-section">
         <div class="text-3xl mb-4">4️⃣</div>
         <h3 class="font-semibold text-lg mb-2">Satysfakcja</h3>
-        <p class="text-sm">Zadowolenie gwarantowane. I czysta robota.</p>
+        <p class="text-sm">Zadowolenie gwarantowane.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- USLUGI -->
-<section id="uslugi" class="py-24 bg-gray-50">
+<section id="uslugi" class="py-24 bg-gray-50 gsap-section">
   <div class="max-w-6xl mx-auto px-6">
     <h2 class="text-4xl font-bold mb-16 text-center text-[#000042]">Nasze usługi</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -102,7 +102,7 @@
       </a>
 
       <!-- Zabezpieczenia przed ptakami -->
-      <a href="{% url 'zabezpieczenia-przeciwko-ptakom' %}" class="group block bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
+      <a href="{% url 'zabezpieczenia-przed-ptakami' %}" class="group block bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
         <div class="overflow-hidden">
           <img src="{% static 'images/kolce.jpg' %}" alt="Zabezpieczenia przed ptakami" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
         </div>
@@ -114,26 +114,26 @@
       </a>
 
       <a href="/kontakt/" class="group block bg-[#000042] text-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
-  <div class="flex flex-col justify-center items-center p-10 h-full text-center">
-    
-    <!-- Ikonka -->
-    <div class="text-4xl mb-4 animate-bounce">💬</div>
-    
-    <!-- Nagłówek -->
-    <h3 class="text-2xl font-bold mb-2 group-hover:text-blue-300 transition-colors">
-      Nie widzisz swojej usługi?
-    </h3>
-    
-    <!-- Tekst -->
-    <p class="text-sm opacity-90 mb-4">Skontaktuj się z nami – postarany się pomóc!</p>
-    
-    <!-- Link CTA -->
-    <span class="inline-block mt-2 px-5 py-2 bg-white text-[#000042] font-semibold rounded-full transition hover:bg-blue-100 hover:scale-105">
-      Napisz do nas →
-    </span>
+      <div class="flex flex-col justify-center items-center p-10 h-full text-center">
+        
+        <!-- Ikonka -->
+        <div class="text-4xl mb-4 animate-bounce">💬</div>
+        
+        <!-- Nagłówek -->
+        <h3 class="text-2xl font-bold mb-2 group-hover:text-blue-300 transition-colors">
+          Nie widzisz swojej usługi?
+        </h3>
+        
+        <!-- Tekst -->
+        <p class="text-sm opacity-90 mb-4">Skontaktuj się z nami – postarany się pomóc!</p>
+        
+        <!-- Link CTA -->
+        <span class="inline-block mt-2 px-5 py-2 bg-white text-[#000042] font-semibold rounded-full transition hover:bg-blue-100 hover:scale-105">
+          Napisz do nas →
+        </span>
 
-  </div>
-</a>
+      </div>
+    </a>
 
 
     </div>
@@ -146,7 +146,7 @@
   <div class="max-w-4xl mx-auto px-6 text-center">
     <h2 class="text-4xl font-bold text-[#000042] mb-12">Co mówią nasi klienci</h2>
     <div class="grid md:grid-cols-2 gap-10">
-      <div class="bg-gray-50 p-6 rounded-xl shadow text-left">
+      <div class="bg-gray-50 p-6 rounded-xl shadow text-left gsap-section">
         <p class="text-gray-700 mb-4 italic">
             "Dziękujemy za profesjonalne wykonanie usługi. Dzięki temu nasze panele są bardziej wydajne. 
             Ponadto zastosowane metody mycia są przyjezne dla środowiska. Miły kontaktowy człowiek z dużym zasobem wiedzy w dziedzinie , którą się zajmuje. Dziękujemy."
@@ -158,7 +158,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-gray-50 p-6 rounded-xl shadow text-left">
+      <div class="bg-gray-50 p-6 rounded-xl shadow text-left gsap-section">
         <p class="text-gray-700 mb-4 italic">
           "Wykonawca jest słowny,terminowy i bardzo profesjonalny. Efekt jego pracy przerósł moje oczekiwania. Przyjemnością było współpracować z nim
           "</p>
@@ -169,7 +169,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-gray-50 p-6 rounded-xl shadow text-left">
+      <div class="bg-gray-50 p-6 rounded-xl shadow text-left gsap-section">
         <p class="text-gray-700 mb-4 italic">
           "Świetna współpraca. Pan Konrad super zorganizowany, dokładny, z pozytywną energią. Okna nawet po deszczu lśnią, bez smug ani zacieków. Na pewno jeszcze nie raz skorzystam."</p>
         <div class="flex items-center">
@@ -179,7 +179,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-gray-50 p-6 rounded-xl shadow text-left">
+      <div class="bg-gray-50 p-6 rounded-xl shadow text-left gsap-section">
         <p class="text-gray-700 mb-4 italic">
           Zlecenie mycia okien na klatce schodowej wykonane terminowo i dokładnie.
         </p>
@@ -192,7 +192,7 @@
   </div>
 </section>
 
-<section class="py-16 bg-white" id="opinie-oferteo">
+<section class="py-16 bg-white gsap-section" id="opinie-oferteo">
   <div class="max-w-4xl mx-auto px-6">
     <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 px-6 py-5 bg-[#F9FAFB] border border-gray-200 rounded-2xl shadow hover:shadow-md transition text-center sm:text-left overflow-hidden">
 
@@ -220,25 +220,69 @@
 
 
 <!-- REALIZACJE -->
-<section class="py-24 bg-gray-100" id="realizacje">
+<section class="py-24 bg-gray-100 gsap-section" id="realizacje">
   <div class="max-w-4xl mx-auto px-6 text-center">
-    <h2 class="text-4xl font-bold mb-6">Zrealizowane projekty</h2>
-    <p class="text-lg text-gray-700 mb-10">Zobacz efekty naszej pracy – przed i po czyszczeniu.</p>
-    <a href="{% url 'realizacje' %}" class="inline-block bg-[#000042] hover:bg-[#1E3A8A] hover:scale-105 text-white font-semibold py-4 px-10 rounded-full shadow-md transition duration-300">
+    <h2 class="text-4xl font-bold mb-6 gsap-section">Zrealizowane projekty</h2>
+    <p class="text-lg text-gray-700 mb-10 gsap-section">Zobacz efekty naszej pracy.</p>
+    <a href="{% url 'realizacje' %}" class="inline-block bg-[#000042] hover:bg-[#1E3A8A] hover:scale-105 text-white font-semibold py-4 px-10 rounded-full shadow-md transition duration-300 gsap-section">
       Galeria realizacji
     </a>
   </div>
 </section>
 
 <!-- CTA FINAL -->
-<section class="py-24 bg-[#000042] text-white text-center">
+<section class="py-24 bg-[#000042] text-white text-center gs">
   <div class="max-w-3xl mx-auto px-6">
-    <h2 class="text-4xl font-bold mb-6">Gotowy na czystość?</h2>
-    <p class="text-lg mb-8">Zostaw dane, a my zajmiemy się resztą. Profesjonalnie, lokalnie, na czas.</p>
-    <a href="{% url 'kontakt' %}" class="inline-block bg-[#46A2DA] hover:bg-white hover:text-[#000042] text-white font-semibold py-4 px-8 rounded-xl transition duration-300">
+    <h2 class="text-4xl font-bold mb-6 gsap-section">Gotowy na czystość?</h2>
+    <p class="text-lg mb-8 gsap-section">Zostaw dane, a my zajmiemy się resztą. Profesjonalnie, lokalnie, na czas.</p>
+    <a href="{% url 'kontakt' %}" class="inline-block bg-[#46A2DA] hover:bg-white hover:text-[#000042] text-white font-semibold py-4 px-8 rounded-xl transition duration-300 gsap-section">
       Skontaktuj się z nami
     </a>
   </div>
 </section>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Fade-up i slide dla sekcji
+    gsap.utils.toArray(".gsap-section").forEach((section, i) => {
+      gsap.from(section, {
+        opacity: 0,
+        y: 60,
+        duration: 0.5,
+        ease: "power2.out",
+        delay: 0.1 * i,
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleActions: "play none none none"
+        }
+      });
+    });
+
+    // Animacja HERO na wejście
+    gsap.from("section:first-of-type h1", {
+      opacity: 0,
+      y: -30,
+      duration: 1
+    });
+    gsap.from("section:first-of-type p", {
+      opacity: 0,
+      y: -10,
+      duration: 1,
+      delay: 0.3
+    });
+    gsap.from("section:first-of-type a", {
+      opacity: 0,
+      scale: 0.8,
+      duration: 0.6,
+      delay: 0.6,
+      stagger: 0.2
+    });
+
+
+  });
+</script>
+
 
 {% endblock %}
