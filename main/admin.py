@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Project, ProjectImage
+from .models import Category, Project, ProjectImage, Client
 
 # Register your models here.
 class ProjectImageInline(admin.TabularInline):
@@ -12,3 +12,8 @@ class ProjectAdmin(admin.ModelAdmin):
 
 admin.site.register(Category)
 admin.site.register(Project, ProjectAdmin)
+
+@admin.register(Client)
+class ClientAdmin(admin.ModelAdmin):
+    list_display = ['name', 'created']
+    ordering = ['-created']

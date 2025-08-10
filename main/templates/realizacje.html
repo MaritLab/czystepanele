@@ -39,7 +39,13 @@
              data-category-id="{{ category.id }}"
              data-date="{{ project.date|date:'Y-m-d' }}">
             <div class="relative w-full h-48">
-              <img src="{{ project.main_image.url }}" alt="{{ project.title }}" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+              {% if project.main_image %}
+                <img src="{{ project.main_image.url }}" alt="{{ project.title }}" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+              {% else %}
+                <div class="absolute inset-0 w-full h-full flex items-center justify-center bg-gray-200 text-gray-500 text-sm">
+                  Brak zdjęcia
+                </div>
+              {% endif %}
             </div>
             <div class="p-4">
               <h3 class="text-lg font-semibold text-gray-900">{{ project.title }}</h3>

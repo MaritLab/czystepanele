@@ -4,51 +4,36 @@
 {% block title %}Czystepanele.pl - Profesjonalne usługi czyszczenia{% endblock %}
 
 {% block content %}
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+
 
 <!-- HERO SECTION -->
-<section class="w-full min-h-screen bg-cover bg-center bg-no-repeat relative flex items-center justify-center" style="background-image: url('{% static background_image %}');">
-  <div class="absolute inset-0 bg-black/60"></div>
+<section id="hero" class="w-full min-h-screen bg-black relative flex items-center justify-center hero">
+  <div class="absolute inset-0 hero-media bg-cover bg-center"
+       style="background-image: url('{{ background_image_url }}');"></div>
+
+  <div class="absolute inset-0 bg-black/60 hero-overlay"></div>
+
   <div class="relative z-10 text-center text-white px-6 max-w-4xl">
-    <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6 drop-shadow-xl">czystepanele.pl</h1>
-    <p class="text-xl md:text-2xl mb-8 drop-shadow-md">Profesjonalne mycie paneli, okien i powierzchni na terenie północnej Polski</p>
+    <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6 drop-shadow-xl">
+      czystepanele.pl
+    </h1>
+    <p class="text-xl md:text-2xl mb-8 drop-shadow-md">
+      Profesjonalne mycie powierzchni na terenie północno-centralnej Polski
+    </p>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="{% url 'kontakt' %}" class="bg-white text-[#000042] px-6 py-3 rounded-full font-semibold hover:scale-105">Umów termin</a>
-      <a href="#opinie" class="text-white underline hover:text-blue-300">Zobacz opinie (5/5⭐)</a>
+      <a href="{% url 'kontakt' %}"
+         class="bg-white text-[#000042] px-6 py-3 rounded-full font-semibold hover:scale-105 transition-transform">
+         Umów termin
+      </a>
     </div>
   </div>
 </section>
 
-<!-- JAK DZIALAMY -->
-<section class="py-24 bg-white">
-  <div class="max-w-6xl mx-auto px-6 text-center">
-    <h2 class="text-4xl font-bold text-[#000042] mb-16">Jak działamy</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
-      <div class="flex flex-col items-center text-gray-700 gsap-section">
-        <div class="text-3xl mb-4">1️⃣</div>
-        <h3 class="font-semibold text-lg mb-2">Kontakt i wycena</h3>
-        <p class="text-sm">Zadzwoń lub napisz. Odpowiadamy szybko.</p>
-      </div>
-      <div class="flex flex-col items-center text-gray-700 gsap-section">
-        <div class="text-3xl mb-4">2️⃣</div>
-        <h3 class="font-semibold text-lg mb-2">Ustalamy termin</h3>
-        <p class="text-sm">Dostosowujemy się do Twoich potrzeb.</p>
-      </div>
-      <div class="flex flex-col items-center text-gray-700 gsap-section">
-        <div class="text-3xl mb-4">3️⃣</div>
-        <h3 class="font-semibold text-lg mb-2">Czyszczenie</h3>
-        <p class="text-sm">Profesjonalny sprzęt i doświadczenie.</p>
-      </div>
-      <div class="flex flex-col items-center text-gray-700 gsap-section">
-        <div class="text-3xl mb-4">4️⃣</div>
-        <h3 class="font-semibold text-lg mb-2">Satysfakcja</h3>
-        <p class="text-sm">Zadowolenie gwarantowane.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- USLUGI -->
-<section id="uslugi" class="py-24 bg-gray-50 gsap-section">
+<section id="uslugi" class="py-24 bg-gray-50">
   <div class="max-w-6xl mx-auto px-6">
     <h2 class="text-4xl font-bold mb-16 text-center text-[#000042]">Nasze usługi</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -113,7 +98,7 @@
         </div>
       </a>
 
-      <a href="/kontakt/" class="group block bg-[#000042] text-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
+      <a href="/kontakt/" class="service-card group block bg-[#000042] text-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 hover:-translate-y-1.5">
       <div class="flex flex-col justify-center items-center p-10 h-full text-center">
         
         <!-- Ikonka -->
@@ -121,11 +106,11 @@
         
         <!-- Nagłówek -->
         <h3 class="text-2xl font-bold mb-2 group-hover:text-blue-300 transition-colors">
-          Nie widzisz swojej usługi?
+          Nie widzisz tego, czego potrzebujesz?
         </h3>
         
         <!-- Tekst -->
-        <p class="text-sm opacity-90 mb-4">Skontaktuj się z nami – postarany się pomóc!</p>
+        <p class="text-sm opacity-90 mb-4">Skontaktuj się z nami – postaramy się pomóc!</p>
         
         <!-- Link CTA -->
         <span class="inline-block mt-2 px-5 py-2 bg-white text-[#000042] font-semibold rounded-full transition hover:bg-blue-100 hover:scale-105">
@@ -140,13 +125,71 @@
   </div>
 </section>
 
+<!-- DLACZEGO MY -->
+<section id="dlaczego-my" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    
+    <h2 class="text-4xl font-bold text-[#000042] mb-16">Dlaczego warto nam zaufać?</h2>
 
-<!-- OPINIE -->
-<section id="opinie" class="mt-10 bg-white">
-  <div class="max-w-4xl mx-auto px-6 text-center">
-    <h2 class="text-4xl font-bold text-[#000042] mb-12">Co mówią nasi klienci</h2>
-    <div class="grid md:grid-cols-2 gap-10">
-      <div class="bg-gray-50 p-6 rounded-xl shadow text-left gsap-section">
+    <!-- JAK DZIAŁAMY -->
+    <div class="mb-20">
+      <h3 class="text-2xl font-semibold text-[#000042] mb-10">Jak działamy</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+        <div class="flex flex-col items-center text-gray-700 gsap-section">
+          <div class="text-3xl mb-4">1️⃣</div>
+          <h4 class="font-semibold text-lg mb-2">Kontakt i wycena</h4>
+          <p class="text-sm">Zadzwoń lub napisz. Odpowiadamy szybko.</p>
+        </div>
+        <div class="flex flex-col items-center text-gray-700 gsap-section">
+          <div class="text-3xl mb-4">2️⃣</div>
+          <h4 class="font-semibold text-lg mb-2">Ustalamy termin</h4>
+          <p class="text-sm">Dostosowujemy się do Twoich potrzeb.</p>
+        </div>
+        <div class="flex flex-col items-center text-gray-700 gsap-section">
+          <div class="text-3xl mb-4">3️⃣</div>
+          <h4 class="font-semibold text-lg mb-2">Czyszczenie</h4>
+          <p class="text-sm">Profesjonalny sprzęt i doświadczenie.</p>
+        </div>
+        <div class="flex flex-col items-center text-gray-700 gsap-section">
+          <div class="text-3xl mb-4">4️⃣</div>
+          <h4 class="font-semibold text-lg mb-2">Satysfakcja</h4>
+          <p class="text-sm">Zadowolenie gwarantowane.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ZAUFALI NAM -->
+    <div class="mb-20 relative">
+      <h3 class="text-3xl font-bold text-center text-[#000042] mb-10">Zaufali nam</h3>
+
+      <div class="relative overflow-hidden max-w-6xl mx-auto">
+        <div id="trusted-carousel" class="flex transition-transform duration-700 ease-in-out">
+          {% for client in clients %}
+          <div class="w-full sm:w-1/2 md:w-1/3 flex-shrink-0 flex flex-col items-center px-6 py-4">
+            <img src="{{ client.logo.url }}" alt="{{ client.name }}"
+              class="aspect-square object-contain h-16 mb-3 grayscale hover:grayscale-0 transition">
+            <p class="text-center text-sm text-[#000042] font-medium">{{ client.name }}</p>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Strzałki -->
+        <button id="prev" aria-label="Poprzedni"
+          class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md z-10">
+          &#8592;
+        </button>
+        <button id="next" aria-label="Następny"
+          class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md z-10">
+          &#8594;
+        </button>
+      </div>
+    </div>
+
+    <!-- OPINIE KLIENTÓW -->
+    <div>
+      <h3 class="text-2xl font-semibold text-[#000042] mb-10">Co mówią nasi klienci</h3>
+      <div class="grid md:grid-cols-2 gap-10">
+        <div class="bg-gray-50 p-6 rounded-xl shadow text-left">
         <p class="text-gray-700 mb-4 italic">
             "Dziękujemy za profesjonalne wykonanie usługi. Dzięki temu nasze panele są bardziej wydajne. 
             Ponadto zastosowane metody mycia są przyjezne dla środowiska. Miły kontaktowy człowiek z dużym zasobem wiedzy w dziedzinie , którą się zajmuje. Dziękujemy."
@@ -158,7 +201,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-gray-50 p-6 rounded-xl shadow text-left gsap-section">
+      <div class="bg-gray-50 p-6 rounded-xl shadow text-left">
         <p class="text-gray-700 mb-4 italic">
           "Wykonawca jest słowny,terminowy i bardzo profesjonalny. Efekt jego pracy przerósł moje oczekiwania. Przyjemnością było współpracować z nim
           "</p>
@@ -169,7 +212,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-gray-50 p-6 rounded-xl shadow text-left gsap-section">
+      <div class="bg-gray-50 p-6 rounded-xl shadow text-left">
         <p class="text-gray-700 mb-4 italic">
           "Świetna współpraca. Pan Konrad super zorganizowany, dokładny, z pozytywną energią. Okna nawet po deszczu lśnią, bez smug ani zacieków. Na pewno jeszcze nie raz skorzystam."</p>
         <div class="flex items-center">
@@ -179,7 +222,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-gray-50 p-6 rounded-xl shadow text-left gsap-section">
+      <div class="bg-gray-50 p-6 rounded-xl shadow text-left">
         <p class="text-gray-700 mb-4 italic">
           Zlecenie mycia okien na klatce schodowej wykonane terminowo i dokładnie.
         </p>
@@ -187,102 +230,249 @@
           <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold">W</div>
           <div class="ml-4">
             <p class="font-semibold text-sm">Wspólnota Mieszkaniowa</p>
+          </div>
+        </div> 
+      </div>
+      <div class="bg-gray-50 p-6 rounded-xl shadow text-left">
+        <p class="text-gray-700 mb-4 italic">
+          Zamówiłam mycie okien w mieszkaniu, czyste i lśniące jak nigdy, szybko i sprawnie zmieniły wygląd. Polecam magika.
+        </p>
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold">M</div>
+          <div class="ml-4">
+            <p class="font-semibold text-sm">Marzena</p>
+          </div>
+        </div> 
+      </div>
+      <!-- OPINIA Z OFERTEO W FORMACIE KAFELKA -->
+      <div class="bg-gray-50 p-6 rounded-xl shadow text-left flex flex-col justify-between h-full">
+        <!-- Nagłówek z gwiazdkami i źródłem -->
+        <div class="mb-4">
+          <div class="flex items-center mb-2">
+            <div class="text-yellow-400 text-xl mr-2">★★★★★</div>
+            <p class="font-semibold text-sm text-gray-800">Oferteo.pl</p>
+          </div>
+          <p class="text-sm text-gray-700">
+            Potwierdzona jakość usług na podstawie opinii zweryfikowanych klientów.
+          </p>
         </div>
-    </div>
-  </div>
-</section>
 
-<section class="py-16 bg-white gsap-section" id="opinie-oferteo">
-  <div class="max-w-4xl mx-auto px-6">
-    <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 px-6 py-5 bg-[#F9FAFB] border border-gray-200 rounded-2xl shadow hover:shadow-md transition text-center sm:text-left overflow-hidden">
-
-      <!-- Ikona gwiazdek -->
-      <div class="text-yellow-500 text-3xl sm:text-4xl">
-        ★★★★★
+        <!-- CTA -->
+        <a href="https://www.oferteo.pl/czystepanele-pl-mycie-okien-i-instalacji-fotowoltaicznych-konrad-kusajda/firma/5818381"
+          target="_blank" rel="noopener noreferrer"
+          class="mt-auto inline-block bg-[#000042] hover:bg-blue-800 text-white text-sm font-semibold px-5 py-2 rounded-full transition text-center">
+          Zobacz opinie →
+        </a>
       </div>
 
-      <!-- Treść -->
-      <div class="flex-1">
-        <p class="text-lg font-semibold text-gray-800">Ocena 5.0 / 5.0 na Oferteo</p>
-        <p class="text-sm text-gray-500">Na podstawie opinii klientów</p>
+
+
+
+
+
       </div>
-
-      <!-- CTA -->
-      <a href="https://www.oferteo.pl/czystepanele-pl-mycie-okien-i-instalacji-fotowoltaicznych-konrad-kusajda/firma/5818381"
-         target="_blank" rel="noopener noreferrer"
-         class="bg-[#000042] hover:bg-[#1E3A8A] text-white text-sm font-medium px-5 py-2 rounded-full transition whitespace-nowrap">
-        Zobacz opinie
-      </a>
-
     </div>
+
+    <!-- PODSEKCJA: O nas -->
+    <div class="mt-20 mb-20">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        
+        <!-- Lewa kolumna: tekst -->
+        <div class="text-left">
+          <h3 class="text-2xl font-semibold text-[#000042] mb-4">O nas</h3>
+          <p class="text-sm text-gray-700 mb-4">
+            Jesteśmy firmą specjalizującą się w czyszczeniu paneli fotowoltaicznych, okien, elewacji oraz pielęgnacji terenów zielonych. 
+            Nasz zespół działa sprawnie, terminowo i z dbałością o detale.
+          </p>
+          <p class="text-sm text-gray-700">
+            Działamy głównie na terenie województwa pomorskiego i warmińsko-mazurskiego, obsługując zarówno klientów indywidualnych, jak i firmy. 
+            Korzystamy z bezpiecznych, ekologicznych środków czystości oraz nowoczesnego sprzętu do prac na wysokości.
+          </p>
+        </div>
+
+        <!-- Prawa kolumna: zdjęcie -->
+        <div>
+          <img src="{% static 'images/mycie-okien.webp' %}" alt="Prace na wysokości – czystepanele.pl"
+              class="rounded-2xl shadow-lg w-full h-auto object-cover">
+        </div>
+
+      </div>
+    </div>
+
+
   </div>
 </section>
 
 
 <!-- REALIZACJE -->
-<section class="py-24 bg-gray-100 gsap-section" id="realizacje">
-  <div class="max-w-4xl mx-auto px-6 text-center">
+<section class="py-24 bg-gray-100" id="realizacje">
+  <div class="max-w-6xl mx-auto px-6 text-center">
     <h2 class="text-4xl font-bold mb-6 gsap-section">Zrealizowane projekty</h2>
     <p class="text-lg text-gray-700 mb-10 gsap-section">Zobacz efekty naszej pracy.</p>
+
+    <div id="project-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+      {% for project in random_projects %}
+        <a href="{{ project.get_absolute_url }}" 
+           class="project-card block bg-white rounded-xl shadow hover:shadow-lg overflow-hidden transition-all"
+           data-date="{{ project.date|date:'Y-m-d' }}">
+          <div class="relative w-full h-48">
+            {% if project.main_image %}
+              <img src="{{ project.main_image.url }}" alt="{{ project.title }}" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+            {% else %}
+              <div class="absolute inset-0 w-full h-full flex items-center justify-center bg-gray-200 text-gray-500 text-sm">
+                Brak zdjęcia
+              </div>
+            {% endif %}
+          </div>
+          <div class="p-4">
+            <h3 class="text-lg font-semibold text-gray-900">{{ project.title }}</h3>
+            <p class="text-sm text-gray-700">{{ project.company_name }}</p>
+            <p class="text-sm text-gray-500">{{ project.location }} &bull; {{ project.date|date:"m.Y" }}</p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
     <a href="{% url 'realizacje' %}" class="inline-block bg-[#000042] hover:bg-[#1E3A8A] hover:scale-105 text-white font-semibold py-4 px-10 rounded-full shadow-md transition duration-300 gsap-section">
-      Galeria realizacji
+      Zobacz całą galerię
     </a>
   </div>
 </section>
 
-<!-- CTA FINAL -->
-<section class="py-24 bg-[#000042] text-white text-center gs">
-  <div class="max-w-3xl mx-auto px-6">
-    <h2 class="text-4xl font-bold mb-6 gsap-section">Gotowy na czystość?</h2>
-    <p class="text-lg mb-8 gsap-section">Zostaw dane, a my zajmiemy się resztą. Profesjonalnie, lokalnie, na czas.</p>
-    <a href="{% url 'kontakt' %}" class="inline-block bg-[#46A2DA] hover:bg-white hover:text-[#000042] text-white font-semibold py-4 px-8 rounded-xl transition duration-300 gsap-section">
-      Skontaktuj się z nami
-    </a>
+
+<!-- CTA -->
+<section class="py-20 bg-gradient-to-b from-gray-100 to-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="rounded-3xl bg-[#000042] text-white p-8 sm:p-12 shadow-lg flex flex-col lg:flex-row items-center justify-between gap-6 gsap-section">
+      <div class="text-center lg:text-left max-w-2xl">
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+          Gotowy na czystość?
+        </h2>
+        <p class="mt-3 text-white/80 text-base sm:text-lg">
+          Od umówienia terminu do lśniących powierzchni.
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center gap-3">
+        <a href="{% url 'kontakt' %}"
+           class="inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold bg-white text-[#000042] hover:bg-gray-100 shadow transition">
+          Skontaktuj się z nami
+        </a>
+        <a href="tel:+48000000000"
+           class="inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold ring-2 ring-white/70 text-white/95 hover:bg-white/10 transition">
+          Zadzwoń teraz
+        </a>
+      </div>
+    </div>
   </div>
 </section>
+
+
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    gsap.registerPlugin(ScrollTrigger);
+  (function () {
+    const track = document.getElementById('trusted-carousel');
+    const container = track.parentElement;          // wrapper z overflow-hidden
+    const slides = Array.from(track.children);
+    const btnPrev = document.getElementById('prev');
+    const btnNext = document.getElementById('next');
 
-    // Fade-up i slide dla sekcji
-    gsap.utils.toArray(".gsap-section").forEach((section, i) => {
-      gsap.from(section, {
-        opacity: 0,
-        y: 60,
-        duration: 0.5,
-        ease: "power2.out",
-        delay: 0.1 * i,
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          toggleActions: "play none none none"
-        }
-      });
+    let index = 0;
+    let autoplayId = null;
+
+    // ile kart widać na danym breakpointcie (spójne z w-full / sm:w-1/2 / md:w-1/3)
+    function visibleCount() {
+      if (window.innerWidth >= 768) return 3; // md
+      if (window.innerWidth >= 640) return 2; // sm
+      return 1;                               // base
+    }
+
+    // dopasuj index tak, by nie uciekał poza zakres przy różnych ilościach widocznych
+    function normalizeIndex() {
+      const vis = visibleCount();
+      const maxStart = Math.max(0, slides.length - vis);
+      if (index < 0) index = maxStart;        // skok na koniec (loop wstecz)
+      if (index > maxStart) index = 0;        // skok na początek (loop w przód)
+    }
+
+    function layout() {
+      const vis = visibleCount();
+      const slideW = container.clientWidth / vis;
+
+      // wymuś stałą szerokość slajdów w px, żeby transform działał idealnie
+      slides.forEach(s => { s.style.width = slideW + 'px'; });
+
+      // płynne przesunięcie toru
+      track.style.willChange = 'transform';
+      track.style.transform = `translateX(${-index * slideW}px)`;
+    }
+
+    function next() { index++; normalizeIndex(); layout(); }
+    function prev() { index--; normalizeIndex(); layout(); }
+
+    // autoodtwarzanie
+    function startAutoplay() { stopAutoplay(); autoplayId = setInterval(next, 4000); }
+    function stopAutoplay()  { if (autoplayId) clearInterval(autoplayId); autoplayId = null; }
+
+    // zdarzenia
+    btnNext.addEventListener('click', next);
+    btnPrev.addEventListener('click', prev);
+    window.addEventListener('resize', () => { normalizeIndex(); layout(); });
+
+    // pauza na hoverze
+    container.addEventListener('mouseenter', stopAutoplay);
+    container.addEventListener('mouseleave', startAutoplay);
+
+    // prosty swipe na mobile
+    let startX = null;
+    container.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, {passive:true});
+    container.addEventListener('touchend', (e) => {
+      if (startX === null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) (dx < 0 ? next() : prev());
+      startX = null;
     });
 
-    // Animacja HERO na wejście
-    gsap.from("section:first-of-type h1", {
-      opacity: 0,
-      y: -30,
-      duration: 1
-    });
-    gsap.from("section:first-of-type p", {
-      opacity: 0,
-      y: -10,
-      duration: 1,
-      delay: 0.3
-    });
-    gsap.from("section:first-of-type a", {
-      opacity: 0,
-      scale: 0.8,
-      duration: 0.6,
-      delay: 0.6,
-      stagger: 0.2
-    });
+    // init
+    normalizeIndex();
+    layout();
+    startAutoplay();
+  })();
 
-
-  });
+  
 </script>
+
+{{ hero_image_urls|json_script:"hero-images" }}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const dataEl = document.getElementById('hero-images');
+  if (!dataEl) return;
+
+  const imgs = JSON.parse(dataEl.textContent || '[]');
+  if (!imgs.length) return;
+
+  const layers = document.querySelectorAll('#hero .hero-layer');
+  let current = Math.max(0, imgs.indexOf('{{ background_image_url }}'));
+
+  // Preload
+  imgs.forEach(u => { const i = new Image(); i.src = u; });
+
+  function swap() {
+    current = (current + 1) % imgs.length;
+    const nextUrl = imgs[current];
+
+    const a = layers[0], b = layers[1];
+    const top = +getComputedStyle(a).opacity === 1 ? a : b;
+    const bottom = top === a ? b : a;
+
+    bottom.style.backgroundImage = `url('${nextUrl}')`;
+    bottom.style.opacity = '1';
+    top.style.opacity = '0';
+  }
+
+  setInterval(swap, 5000);
+});
+</script>
+
 
 
 {% endblock %}
