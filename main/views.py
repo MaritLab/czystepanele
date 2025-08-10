@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from .models import Category
+from .models import Category, Project, Client
 from django.http import JsonResponse, Http404
-from .models import Project
 import random
+from django.templatetags.static import static
 
 def index(request):
     hero_images = [
@@ -12,10 +12,20 @@ def index(request):
         'images/kolce.jpg',
         'images/okna.jpg',
     ]
-    selected_image = random.choice(hero_images)
+    hero_image_urls = [static(p) for p in hero_images]
+    background_image_url = random.choice(hero_image_urls)
+
+    random_projects = Project.objects.order_by('?')[:3]
+    clients = Client.objects.all().order_by('-created')
+
     return render(request, 'index.html', {
-        'background_image' : selected_image
+        'background_image_url': background_image_url,
+        'hero_image_urls': hero_image_urls,   # (na rotację, jeśli chcesz)
+        'clients': clients,
+        'random_projects': random_projects,
     })
+
+    
     
 
 def kontakt(request):
@@ -56,8 +66,10 @@ def get_project_details(request, project_id):
         'title': project.title,
         'description': project.description,
         'date': project.date.strftime("%Y-%m-%d"),
-        'images': [img.image.url for img in project.images.all()]
+        'main_image': project.main_image.url if project.main_image else None,
+        'images': [img.image.url for img in project.images.all() if img.image]
     }
+
     return JsonResponse(data)
 
 def preview_page(request, project_id, slug):
