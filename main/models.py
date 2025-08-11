@@ -8,6 +8,10 @@ from io import BytesIO
 from django.core.files.base import ContentFile
 from django.utils.text import slugify
 import os
+from django.conf import settings
+from django.contrib.staticfiles import finders
+
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -15,6 +19,13 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
+def _get_logo_path():
+    path = finders.find("images/logo.png")  
+    if path and os.path.exists(path):
+        return path
+    fallback = os.path.join(settings.BASE_DIR, "static", "images", "logo.png")
+    return fallback if os.path.exists(fallback) else None
 
 class Project(models.Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='projects')
@@ -27,41 +38,48 @@ class Project(models.Model):
     slug = models.SlugField(max_length=200, blank=True)
     tags = TaggableManager(blank=True)
 
+    
+
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('preview_slug', kwargs={'project_id': self.id, 'slug': self.slug})
 
+    def add_logo(self, img):
+        """Dodaje logo w prawym dolnym rogu."""
+        logo_path = _get_logo_path()
+        if not logo_path:
+            return img
+
+        with Image.open(logo_path) as logo:
+            logo = logo.convert("RGBA")
+            logo_width = int(img.width * 0.1)
+            ratio = logo_width / logo.width
+            logo_height = int(logo.height * ratio)
+            logo = logo.resize((logo_width, logo_height), Image.LANCZOS)
+
+            x = img.width - logo.width - 10
+            y = img.height - logo.height - 10
+
+            # mask=logo – gwarantuje użycie kanału alfa
+            img.paste(logo, (x, y), mask=logo)
+        return img
+
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
-        super().save(*args, **kwargs)  # pierwszy zapis, żeby mieć dostęp do image.path
+        super().save(*args, **kwargs)  # pierwszy zapis
 
         if self.main_image:
-            from PIL import Image, ImageDraw, ImageFont
-            from io import BytesIO
-            from django.core.files.base import ContentFile
-
             img_path = self.main_image.path
             img = Image.open(img_path).convert("RGBA")
 
-            # Znak wodny
-            watermark_text = "© czystepanele.pl"
-            draw = ImageDraw.Draw(img)
-            font_size = int(min(img.size) * 0.04)
-            try:
-                font = ImageFont.truetype("arial.ttf", font_size)
-            except:
-                font = ImageFont.load_default()
-            bbox = draw.textbbox((0, 0), watermark_text, font=font)
-            textwidth = bbox[2] - bbox[0]
-            textheight = bbox[3] - bbox[1]
-            x = img.width - textwidth - 10
-            y = img.height - textheight - 10
-            draw.text((x, y), watermark_text, font=font, fill=(255, 255, 255, 128))
+            # Dodanie logo
+            img = self.add_logo(img)
 
-            # Kompresja i konwersja do WebP
+            # Konwersja do WebP
             buffer = BytesIO()
             img = img.convert("RGB")
             filename = f"{slugify(self.title)}-main.webp"
@@ -69,7 +87,7 @@ class Project(models.Model):
             self.main_image.save(filename, ContentFile(buffer.getvalue()), save=False)
             buffer.close()
 
-        super().save(*args, **kwargs)  # drugi zapis z przetworzonym plikiem
+        super().save(*args, **kwargs)  # drugi zapis
 
 
 class ProjectImage(models.Model):
@@ -79,28 +97,35 @@ class ProjectImage(models.Model):
     def __str__(self):
         return f"Image for {self.project.title}"
 
+    def add_logo(self, img):
+        logo_path = _get_logo_path()
+        if not logo_path:
+            return img
+
+        with Image.open(logo_path) as logo:
+            logo = logo.convert("RGBA")
+            logo_width = int(img.width * 0.1)
+            ratio = logo_width / logo.width
+            logo_height = int(logo.height * ratio)
+            logo = logo.resize((logo_width, logo_height), Image.LANCZOS)
+
+            x = img.width - logo.width - 10
+            y = img.height - logo.height - 10
+
+            # mask=logo – gwarantuje użycie kanału alfa
+            img.paste(logo, (x, y), mask=logo)
+        return img
+
+
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # Zapisz oryginał, żeby mieć dostęp do pliku
+        super().save(*args, **kwargs)  # zapis oryginału
 
         if self.image:
             img_path = self.image.path
             img = Image.open(img_path).convert("RGBA")
 
-            # Dodanie znaku wodnego
-            watermark_text = "© czystepanele.pl"
-            draw = ImageDraw.Draw(img)
-            font_size = int(min(img.size) * 0.04)
-            try:
-                font = ImageFont.truetype("arial.ttf", font_size)
-            except:
-                font = ImageFont.load_default()
-
-            bbox = draw.textbbox((0, 0), watermark_text, font=font)
-            textwidth = bbox[2] - bbox[0]
-            textheight = bbox[3] - bbox[1]
-            x = img.width - textwidth - 10
-            y = img.height - textheight - 10
-            draw.text((x, y), watermark_text, font=font, fill=(255, 255, 255, 128))
+            # Dodanie logo
+            img = self.add_logo(img)
 
             # Konwersja i zapis do WebP
             buffer = BytesIO()
@@ -110,8 +135,7 @@ class ProjectImage(models.Model):
             self.image.save(filename, ContentFile(buffer.getvalue()), save=False)
             buffer.close()
 
-        super().save(*args, **kwargs)  # drugi zapis z przetworzonym plikiem
-
+        super().save(*args, **kwargs)  # zapis z logo
 
 class Client(models.Model):
     name = models.CharField("Nazwa firmy", max_length=100)
