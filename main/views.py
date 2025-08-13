@@ -49,6 +49,9 @@ def uslugi_wysokosciowe(request):
 def realizacje(request):
     return render(request, 'realizacje.html')
 
+def odsniezanie(request):
+    return render(request, 'odsniezanie.html')
+
 def blog(request):
     return render(request, 'blog.html')
 
