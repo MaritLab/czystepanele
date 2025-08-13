@@ -47,7 +47,6 @@ class Project(models.Model):
         return reverse('preview_slug', kwargs={'project_id': self.id, 'slug': self.slug})
 
     def add_logo(self, img):
-        """Dodaje logo w prawym dolnym rogu."""
         logo_path = _get_logo_path()
         if not logo_path:
             return img
@@ -157,3 +156,4 @@ class Client(models.Model):
 
     def __str__(self):
         return self.name
+

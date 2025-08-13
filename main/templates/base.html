@@ -70,10 +70,11 @@
           </svg>
         </button>
         <ul class="absolute left-0 top-full w-56 bg-white shadow-md rounded-md p-2 opacity-0 scale-y-95 group-hover:opacity-100 group-hover:scale-y-100 origin-top pointer-events-none group-hover:pointer-events-auto transition-all duration-500 ease-in-out z-50">
-          <li><a href="{% url 'mycie-paneli' %}" class="block px-4 py-2 hover:bg-accent/10 rounded">Mycie paneli</a></li>
-          <li><a href="{% url 'mycie-okien' %}" class="block px-4 py-2 hover:bg-accent/10 rounded">Mycie okien</a></li>
-          <li><a href="{% url 'koszenie-trawnikow' %}" class="block px-4 py-2 hover:bg-accent/10 rounded">Koszenie trawników</a></li>
+          <li><a href="{% url 'mycie-okien' %}" class="block px-4 py-2 hover:bg-accent/10 rounded">Mycie okien</a></li>  
           <li><a href="{% url 'uslugi-wysokosciowe' %}" class="block px-4 py-2 hover:bg-accent/10 rounded">Usługi wysokościowe</a></li>
+          <li><a href="{% url 'koszenie-trawnikow' %}" class="block px-4 py-2 hover:bg-accent/10 rounded">Koszenie trawników</a></li>
+          <li><a href="{% url 'mycie-paneli' %}" class="block px-4 py-2 hover:bg-accent/10 rounded">Mycie paneli</a></li>
+          <li><a href="{% url 'odsniezanie' %}" class="block px-4 py-2 hover:bg-accent/10 rounded">Odśnieżanie</a></li>
           <li><a href="{% url 'zabezpieczenia-przed-ptakami' %}" class="block px-4 py-2 hover:bg-accent/10 rounded">Zabezpieczenia przed ptakami</a></li>
         </ul>
       </li>
@@ -106,32 +107,81 @@
   {% block content %}{% endblock %}
 </main>
 
-<footer class="bg-primary text-white py-10 mt-auto">
-  <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 px-4 text-sm">
+<footer class="relative bg-[#46A2DA] text-white py-12 mt-auto">
+  <!-- Subtelna faktura -->
+  <div class="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-soft-light"
+       style="background-image: radial-gradient(circle at 1px 1px, #fff 1px, transparent 1.5px);
+              background-size: 18px 18px;"></div>
+
+  <!-- Treść -->
+  <div class="relative max-w-7xl mx-auto grid md:grid-cols-4 gap-10 px-6 text-sm">
+    
+    <!-- O nas -->
     <div>
-      <h2 class="font-semibold text-lg mb-2">O nas</h2>
-      <p class="leading-relaxed">Jesteśmy specjalistami w myciu paneli fotowoltaicznych, okien oraz realizacji usług wysokościowych. Stawiamy na jakość, bezpieczeństwo i nowoczesny sprzęt.</p>
+      <h2 class="font-semibold text-lg mb-3">O nas</h2>
+      <p class="leading-relaxed text-white/90">
+        Specjaliści od mycia paneli fotowoltaicznych, okien i prac wysokościowych.
+        Stawiamy na <span class="font-semibold">jakość</span>, bezpieczeństwo i nowoczesny sprzęt.
+      </p>
     </div>
+
+    <!-- Nawigacja -->
+    <nav aria-label="Nawigacja">
+      <h2 class="font-semibold text-lg mb-3">Nawigacja</h2>
+      <ul class="space-y-2">
+        <li><a href="{% url 'index' %}" class="group inline-flex items-center hover:text-blue-100 transition">
+          <span class="mr-2 h-1.5 w-1.5 rounded-full bg-white/50 group-hover:bg-white"></span>Strona główna</a></li>
+        <li><a href="{% url 'realizacje' %}" class="group inline-flex items-center hover:text-blue-100 transition">
+          <span class="mr-2 h-1.5 w-1.5 rounded-full bg-white/50 group-hover:bg-white"></span>Realizacje</a></li>
+        <li><a href="{% url 'blog' %}" class="group inline-flex items-center hover:text-blue-100 transition">
+          <span class="mr-2 h-1.5 w-1.5 rounded-full bg-white/50 group-hover:bg-white"></span>Blog</a></li>
+        <li><a href="{% url 'kontakt' %}" class="group inline-flex items-center hover:text-blue-100 transition">
+          <span class="mr-2 h-1.5 w-1.5 rounded-full bg-white/50 group-hover:bg-white"></span>Kontakt</a></li>
+      </ul>
+    </nav>
+
+    <!-- Kontakt -->
     <div>
-      <h2 class="font-semibold text-lg mb-2">Nawigacja</h2>
-      <ul class="space-y-1">
-        <li><a href="{% url 'index' %}" class="hover:underline">Strona główna</a></li>
-        <li><a href="{% url 'realizacje' %}" class="hover:underline">Realizacje</a></li>
-        <li><a href="{% url 'blog' %}" class="hover:underline">Blog</a></li>
-        <li><a href="{% url 'kontakt' %}" class="hover:underline">Kontakt</a></li>
+      <h2 class="font-semibold text-lg mb-3">Kontakt</h2>
+      <ul class="space-y-2 text-white/90">
+        <li class="flex items-center gap-2">
+          <svg class="h-4 w-4 opacity-80" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 2h2.3c.5 0 .9.4 1 .9l.3 2.5c.1.5-.2 1-.7 1.2l-1.5.6a12.7 12.7 0 0 0 5.6 5.6l.6-1.5c.2-.5.7-.8 1.2-.7l2.5.3c.5.1.9.5.9 1v2.3c0 .6-.4 1-1 1A15.5 15.5 0 0 1 3.6 7.6c0-.6.4-1 1-1Z"/></svg>
+          <a href="tel:+48123456789" class="hover:text-white transition">+48 123 456 789</a>
+        </li>
+        <li class="flex items-center gap-2">
+          <svg class="h-4 w-4 opacity-80" viewBox="0 0 24 24" fill="currentColor"><path d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v.4l-10 5.6-10-5.6V6Zm0 3.2V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9.2l-9.3 5.2a2 2 0 0 1-1.9 0L2 9.2Z"/></svg>
+          <a href="mailto:biuro@przyklad.pl" class="hover:text-white transition">biuro@przyklad.pl</a>
+        </li>
+        <li class="flex items-center gap-2">
+          <svg class="h-4 w-4 opacity-80" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 1 7 7c0 5.2-7 13-7 13S5 14.2 5 9a7 7 0 0 1 7-7Zm0 9.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/></svg>
+          Gdańsk, Polska
+        </li>
       </ul>
     </div>
+
+    <!-- Social -->
     <div>
-      <h2 class="font-semibold text-lg mb-2">Kontakt</h2>
-      <address class="not-italic leading-relaxed">
-        tel: <a href="tel:+48123456789" class="hover:underline">+48 123 456 789</a><br>
-        e-mail: <a href="mailto:biuro@cprzyklad.pl" class="hover:underline">biuro@przyklad.pl</a><br>
-        Gdańsk, Polska
-      </address>
+      <h2 class="font-semibold text-lg mb-3">Śledź nas</h2>
+      <div class="flex gap-3">
+        <a href="#" aria-label="Facebook" class="group inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-white/30 hover:ring-white/50 transition">
+          <svg class="h-4 w-4 text-white/90 group-hover:text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M13 10h3l-.4 3H13v9h-3v-9H8v-3h2V8.5C10 6.6 11.1 5 13.8 5H16v3h-2c-.7 0-1 .2-1 .9V10Z"/></svg>
+        </a>
+        <a href="#" aria-label="Instagram" class="group inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-white/30 hover:ring-white/50 transition">
+          <svg class="h-4 w-4 text-white/90 group-hover:text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6-.8a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn" class="group inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-white/30 hover:ring-white/50 transition">
+          <svg class="h-4 w-4 text-white/90 group-hover:text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM3 8h3v13H3V8Zm6 0h3v1.8c.4-.9 1.5-2 3.4-2C18.6 7.8 20 9.4 20 12.6V21h-3v-7c0-1.9-.7-3-2.1-3-1.1 0-2 .7-2.3 1.6V21H9V8Z"/></svg>
+        </a>
+      </div>
     </div>
   </div>
-  <div class="text-center text-xs mt-8">&copy; 2025 czystepanele.pl. Wszelkie prawa zastrzeżone.</div>
+
+  <!-- Dolna linia -->
+  <div class="relative mt-10 border-t border-white/20"></div>
+  <p class="relative mt-6 text-center text-xs text-white/80">&copy; 2025 czystepanele.pl. Wszelkie prawa zastrzeżone.</p>
 </footer>
+
+
 
 <script>
   const toggleBtn = document.getElementById('menu-toggle');
