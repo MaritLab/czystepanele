@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-<section class="relative bg-white pt-36 sm:pt-40 px-4 sm:px-10 lg:px-16">
+<section class="relative bg-white pt-36 sm:pt-40 pb-20 sm:pb-24 lg:pb-32 px-4 sm:px-10 lg:px-16">
   <div class="max-w-7xl mx-auto">
 
     <!-- 🔹 FILTRY KATEGORII I SORTOWANIE -->
@@ -35,18 +35,23 @@
       {% for category in categories %}
         {% for project in category.projects.all %}
           <a href="{{ project.get_absolute_url }}" 
-             class="project-card block bg-white rounded-xl shadow hover:shadow-lg overflow-hidden transition-all"
-             data-category-id="{{ category.id }}"
-             data-date="{{ project.date|date:'Y-m-d' }}">
-            <div class="relative w-full h-48">
+            class="project-card block bg-white rounded-xl shadow hover:shadow-lg overflow-hidden transition-all"
+            data-category-id="{{ category.id }}"
+            data-date="{{ project.date|date:'Y-m-d' }}">
+            
+            <!-- kwadratowy wrapper -->
+            <div class="relative w-full aspect-square">
               {% if project.main_image %}
-                <img src="{{ project.main_image.url }}" alt="{{ project.title }}" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+                <img src="{{ project.main_image.url }}" alt="{{ project.title }}" 
+                    class="absolute inset-0 w-full h-full object-cover" 
+                    loading="lazy">
               {% else %}
                 <div class="absolute inset-0 w-full h-full flex items-center justify-center bg-gray-200 text-gray-500 text-sm">
                   Brak zdjęcia
                 </div>
               {% endif %}
             </div>
+
             <div class="p-4">
               <h3 class="text-lg font-semibold text-gray-900">{{ project.title }}</h3>
               <p class="text-sm text-gray-700">{{ project.company_name }}</p>
@@ -56,6 +61,7 @@
         {% endfor %}
       {% endfor %}
     </div>
+
   </div>
 </section>
 
