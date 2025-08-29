@@ -9,17 +9,12 @@
 
 
 <!-- HERO SECTION -->
-
 <section id="hero"
-  class="w-full bg-black relative flex items-center justify-center
+  class="w-full relative flex items-center justify-center
          pt-20 md:pt-0
-         min-h-[calc(100vh-80px)] md:min-h-screen">
-
-  <!-- BACKGROUND: fade layers -->
-  <div class="absolute inset-0">
-    <div class="hero-layer a absolute inset-0 bg-cover bg-center opacity-100 transition-opacity duration-700 ease-in-out"></div>
-    <div class="hero-layer b absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-700 ease-in-out"></div>
-  </div>
+         min-h-[calc(100vh-80px)] md:min-h-screen
+         bg-black bg-cover bg-center"
+  style="background-image: url('/static/images/hero/mycie-z-podnosnika.webp');">
 
   <!-- OVERLAY -->
   <div class="absolute inset-0 bg-black/50 md:bg-black/40">
@@ -38,7 +33,7 @@
       Usługi czyszczenia i pielęgnacji bez względu na sezon
     </h2>
 
-    <!-- CTA: smuklejsze -->
+    <!-- CTA -->
     <div class="mt-5 md:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
       <a href="/kontakt.html"
          class="px-5 py-2 md:px-6 md:py-2.5
@@ -53,55 +48,8 @@
          Zobacz zakres usług
       </a>
     </div>
-
-    
   </div>
 </section>
-
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const images = [
-      "static/images/1-13.webp",
-      "static/images/snieg.webp",
-      "static/images/1-14.webp"
-    ];
-
-    const a = document.querySelector('.hero-layer.a');
-    const b = document.querySelector('.hero-layer.b');
-    if (!a || !b || images.length === 0) return;
-
-    const setBg = (el, src) => el.style.backgroundImage = `url('${src}')`;
-
-    let idx = 0;        // index zdjęcia
-    let active = a;     // aktualnie widoczna warstwa
-    let hidden = b;     // ukryta warstwa
-
-    // Start: pierwsze zdjęcie
-    setBg(active, images[idx]);
-
-    function nextSlide() {
-      idx = (idx + 1) % images.length;
-      setBg(hidden, images[idx]);
-
-      // fade
-      hidden.classList.remove('opacity-0');
-      hidden.classList.add('opacity-100');
-      active.classList.remove('opacity-100');
-      active.classList.add('opacity-0');
-
-      // zamiana referencji
-      const tmp = active;
-      active = hidden;
-      hidden = tmp;
-    }
-
-    setInterval(nextSlide, 5000);
-  });
-</script>
-
-
 
 
 <!-- USLUGI -->
@@ -114,7 +62,7 @@
       <a href="{% url 'mycie-okien' %}" 
          class="group block bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-transform duration-500 hover:-translate-y-2">
         <div class="overflow-hidden aspect-square">
-          <img src="{% static 'images/1-14.webp' %}" alt="Mycie okien" 
+          <img src="{% static 'images/mycie-okien.webp' %}" alt="Mycie okien" 
                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
                loading="lazy">
         </div>
@@ -129,7 +77,7 @@
       <a href="{% url 'uslugi-wysokosciowe' %}" 
          class="group block bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-transform duration-500 hover:-translate-y-2">
         <div class="overflow-hidden aspect-square">
-          <img src="{% static 'images/1-main.webp' %}" alt="Usługi wysokościowe" 
+          <img src="{% static 'images/uslugi-wysokosciowe.webp' %}" alt="Usługi wysokościowe" 
                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
                loading="lazy">
         </div>
@@ -144,7 +92,7 @@
       <a href="{% url 'koszenie-trawnikow' %}" 
          class="group block bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-transform duration-500 hover:-translate-y-2">
         <div class="overflow-hidden aspect-square">
-          <img src="{% static 'images/trawa.webp' %}" alt="Koszenie trawnika" 
+          <img src="{% static 'images/koszenie-trawnikow.webp' %}" alt="Koszenie trawnika" 
                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
                loading="lazy">
         </div>
@@ -159,7 +107,7 @@
       <a href="{% url 'mycie-paneli' %}" 
          class="group block bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-transform duration-500 hover:-translate-y-2">
         <div class="overflow-hidden aspect-square">
-          <img src="{% static 'images/panele.jpg' %}" alt="Mycie paneli fotowoltaicznych" 
+          <img src="{% static 'images/mycie-paneli-fotowoltaicznych.webp' %}" alt="Mycie paneli fotowoltaicznych" 
                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
                loading="lazy">
         </div>
@@ -174,7 +122,7 @@
       <a href="{% url 'odsniezanie' %}" 
          class="group block bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-transform duration-500 hover:-translate-y-2">
         <div class="overflow-hidden aspect-square">
-          <img src="{% static 'images/snieg.webp' %}" alt="Odśnieżanie" 
+          <img src="{% static 'images/odsniezanie-dachow.webp' %}" alt="Odśnieżanie" 
                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
                loading="lazy">
         </div>
@@ -189,7 +137,7 @@
       <a href="{% url 'zabezpieczenia-przed-ptakami' %}" 
          class="group block bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-transform duration-500 hover:-translate-y-2">
         <div class="overflow-hidden aspect-square">
-          <img src="{% static 'images/kolce1.jpg' %}" alt="Zabezpieczenia przed ptakami" 
+          <img src="{% static 'images/zabezpieczenia-przed-ptakami.webp' %}" alt="Zabezpieczenia przed ptakami" 
                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
                loading="lazy">
         </div>
@@ -455,7 +403,7 @@
 
         <!-- Prawa kolumna: zdjęcie -->
         <div>
-          <img src="{% static 'images/mycie-okien.webp' %}" alt="Prace na wysokości – czystepanele.pl"
+          <img src="{% static 'images/mycie-woda-demineralizowana-1.webp' %}" alt="Prace na wysokości – czystepanele.pl"
               class="rounded-2xl shadow-lg w-full h-auto object-cover">
         </div>
 
