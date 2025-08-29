@@ -103,7 +103,7 @@ class ProjectImage(models.Model):
 
         with Image.open(logo_path) as logo:
             logo = logo.convert("RGBA")
-            logo_width = int(img.width * 0.1)
+            logo_width = int(img.width * 0.2)
             ratio = logo_width / logo.width
             logo_height = int(logo.height * ratio)
             logo = logo.resize((logo_width, logo_height), Image.LANCZOS)
