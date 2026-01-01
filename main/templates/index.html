@@ -13,8 +13,8 @@
   class="w-full relative flex items-center justify-center
          pt-20 md:pt-0
          min-h-[calc(100vh-80px)] md:min-h-screen
-         bg-black bg-cover bg-center"
-  style="background-image: url('/static/images/hero/mycie-z-podnosnika.webp');">
+         bg-cover bg-center"
+  style="background-image: url('{% static "images/hero/mycie-z-podnosnika.webp" %}');">
 
   <!-- OVERLAY -->
   <div class="absolute inset-0 bg-black/50 md:bg-black/40">
@@ -33,7 +33,6 @@
       Usługi czyszczenia i pielęgnacji bez względu na sezon
     </h2>
 
-    <!-- CTA -->
     <div class="mt-5 md:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
       <a href="{% url 'kontakt' %}" 
          class="px-5 py-2 md:px-6 md:py-2.5
@@ -50,7 +49,6 @@
     </div>
   </div>
 </section>
-
 
 <!-- USLUGI -->
 <section id="uslugi" class="py-24 bg-gray-50">

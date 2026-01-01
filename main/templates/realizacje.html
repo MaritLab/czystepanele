@@ -9,100 +9,120 @@
 
 {% block content %}
 <section class="relative bg-white pt-36 sm:pt-40 pb-20 sm:pb-24 lg:pb-32 px-4 sm:px-10 lg:px-16">
-  <div class="max-w-7xl mx-auto">
+  <h1 class="text-4xl sm:text-5xl font-bold text-[#000042] text-center mb-12">
+      Realizacje
+  </h1>
+    <div class="max-w-7xl mx-auto">
 
-    <!-- 🔹 FILTRY KATEGORII I SORTOWANIE -->
-    <div class="flex flex-wrap justify-center gap-3 mb-10">
-      <button class="category-filter bg-gray-900 text-white px-4 py-2 rounded-full hover:bg-gray-800 font-medium" data-category-id="all">
-        Wszystkie
-      </button>
-      {% for category in categories %}
-        <button class="category-filter bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 font-medium" data-category-id="{{ category.id }}">
-          {{ category.name }}
+      <!-- 🔹 FILTRY -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12">
+
+        <button 
+          class="category-filter active bg-gray-900 text-white px-4 py-2 rounded-full hover:bg-gray-800 font-medium transition"
+          data-category-id="all">
+          Wszystkie
         </button>
-      {% endfor %}
 
-      <!-- 🔸 Sortowanie po dacie -->
-      <div class="flex items-center gap-2 ml-6">
-        <span class="text-gray-700 font-medium">Sortuj wg daty:</span>
-        <button id="sort-desc" class="bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300">Od najnowszych</button>
-        <button id="sort-asc" class="bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300">Od najstarszych</button>
+        {% for category in categories %}
+          <button 
+            class="category-filter bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 font-medium transition"
+            data-category-id="{{ category.id }}">
+            {{ category.name }}
+          </button>
+        {% endfor %}
+
+        <!-- 🔸 Sort -->
+        <div class="flex items-center gap-2 ml-6">
+          <span class="text-gray-700 font-medium">Sortuj:</span>
+          <button id="sort-desc" class="sort-btn bg-gray-200 px-3 py-1 rounded hover:bg-gray-300">Najnowsze</button>
+          <button id="sort-asc" class="sort-btn bg-gray-200 px-3 py-1 rounded hover:bg-gray-300">Najstarsze</button>
+        </div>
       </div>
-    </div>
 
-    <!-- 🔹 GALERIA PROJEKTÓW -->
-    <div id="project-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {% for category in categories %}
-        {% for project in category.projects.all %}
+      <!-- 🔹 GRID PROJEKTÓW -->
+      <div id="project-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        {% for project in projects %}
           <a href="{{ project.get_absolute_url }}" 
-            class="project-card block bg-white rounded-xl shadow hover:shadow-lg overflow-hidden transition-all"
-            data-category-id="{{ category.id }}"
+            class="project-card block bg-white rounded-xl shadow hover:shadow-lg overflow-hidden transition-all duration-300"
+            data-category-id="{{ project.category.id }}"
             data-date="{{ project.date|date:'Y-m-d' }}">
-            
-            <!-- kwadratowy wrapper -->
+
             <div class="relative w-full aspect-square">
               {% if project.main_image %}
-                <img src="{{ project.main_image.url }}" alt="{{ project.title }}" 
-                    class="absolute inset-0 w-full h-full object-cover" 
+                <img src="{{ project.main_image.url }}" 
+                    alt="{{ project.title }}" 
+                    class="absolute inset-0 w-full h-full object-cover"
                     loading="lazy">
               {% else %}
-                <div class="absolute inset-0 w-full h-full flex items-center justify-center bg-gray-200 text-gray-500 text-sm">
+                <div class="absolute inset-0 flex items-center justify-center bg-gray-200 text-gray-500">
                   Brak zdjęcia
                 </div>
               {% endif %}
             </div>
 
-            <div class="p-4">
-              <h3 class="text-lg font-semibold text-gray-900">{{ project.title }}</h3>
-              <p class="text-sm text-gray-700">{{ project.company_name }}</p>
-              <p class="text-sm text-gray-500">{{ project.location }} &bull; {{ project.date|date:"m.Y" }}</p>
+            <div class="p-5">
+              <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ project.title }}</h3>
+
+              {% if project.company_name %}
+                <p class="text-sm text-gray-700">{{ project.company_name }}</p>
+              {% endif %}
+
+              <p class="text-sm text-gray-500">
+                {{ project.location }} &bull; {{ project.date|date:"m.Y" }}
+              </p>
             </div>
           </a>
         {% endfor %}
-      {% endfor %}
-    </div>
 
-  </div>
+      </div>
+
+    </div>
 </section>
 
 <script>
+  // =============================
   // 🔹 Filtrowanie kategorii
-  document.querySelectorAll('.category-filter').forEach(button => {
-    button.addEventListener('click', () => {
-      const selected = button.getAttribute('data-category-id');
+  // =============================
+  document.querySelectorAll('.category-filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+
+      document.querySelectorAll('.category-filter').forEach(x => x.classList.remove('active', 'bg-gray-900', 'text-white'));
+      btn.classList.add('active', 'bg-gray-900', 'text-white');
+
+      const id = btn.dataset.categoryId;
       document.querySelectorAll('.project-card').forEach(card => {
-        const cat = card.getAttribute('data-category-id');
-        if (selected === 'all' || selected === cat) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
+        card.classList.toggle('hidden', !(id === "all" || card.dataset.categoryId === id));
       });
     });
   });
 
-  // 🔹 Sortowanie projektów po dacie
-  const sortAscBtn = document.getElementById('sort-asc');
-  const sortDescBtn = document.getElementById('sort-desc');
-  const projectGrid = document.getElementById('project-grid');
+  // =============================
+  // 🔹 Sortowanie dat
+  // =============================
+  const grid = document.getElementById('project-grid');
 
-  function sortProjects(ascending = true) {
-    const cards = Array.from(projectGrid.querySelectorAll('.project-card'));
-    cards.sort((a, b) => {
-      const dateA = new Date(a.getAttribute('data-date'));
-      const dateB = new Date(b.getAttribute('data-date'));
-      return ascending ? dateA - dateB : dateB - dateA;
+  function sortProjects(asc=true) {
+    const cards = [...grid.querySelectorAll('.project-card')];
+    cards.sort((a,b) => {
+      const A = new Date(a.dataset.date);
+      const B = new Date(b.dataset.date);
+      return asc ? A - B : B - A;
     });
-    cards.forEach(card => projectGrid.appendChild(card));
+    cards.forEach(c => grid.appendChild(c));
   }
 
-  sortAscBtn.addEventListener('click', () => sortProjects(true));
-  sortDescBtn.addEventListener('click', () => sortProjects(false));
+  document.getElementById('sort-asc').onclick = () => sortProjects(true);
+  document.getElementById('sort-desc').onclick = () => sortProjects(false);
 
-  // 🔹 Domyślnie sortuj malejąco (najnowsze pierwsze)
-  document.addEventListener('DOMContentLoaded', () => {
-    sortProjects(false);
-  });
-
+  // 🔹 Domyślnie najnowsze
+  document.addEventListener('DOMContentLoaded', () => sortProjects(false));
 </script>
+
+<style>
+  .category-filter.active {
+    background: #111827 !important;
+    color: white !important;
+  }
+</style>
 {% endblock %}

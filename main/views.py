@@ -1,8 +1,20 @@
-from django.shortcuts import render
-from .models import Category, Project, Client
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse, Http404
-import random
 from django.templatetags.static import static
+import random
+
+from .models import (
+    Category,
+    Project,
+    ProjectImage,
+    Client,
+    BlogPost,
+    BlogCategory
+)
+
+# ============================================================
+# STRONA GŁÓWNA
+# ============================================================
 
 def index(request):
     hero_images = [
@@ -20,13 +32,15 @@ def index(request):
 
     return render(request, 'index.html', {
         'background_image_url': background_image_url,
-        'hero_image_urls': hero_image_urls,   # (na rotację, jeśli chcesz)
-        'clients': clients,
+        'hero_image_urls': hero_image_urls,
         'random_projects': random_projects,
+        'clients': clients,
     })
 
-    
-    
+
+# ============================================================
+# PODSTRONY STATYCZNE
+# ============================================================
 
 def kontakt(request):
     return render(request, 'kontakt.html')
@@ -46,35 +60,74 @@ def zabezpieczenia_przed_ptakami(request):
 def uslugi_wysokosciowe(request):
     return render(request, 'uslugi-wysokosciowe.html')
 
-def realizacje(request):
-    return render(request, 'realizacje.html')
-
 def odsniezanie(request):
     return render(request, 'odsniezanie.html')
 
-def blog(request):
-    return render(request, 'blog.html')
 
-def gallery_view(request):
+# ============================================================
+# REALIZACJE – LISTA
+# ============================================================
+
+def realizacje(request):
     categories = Category.objects.prefetch_related('projects__images')
-    return render(request, 'realizacje.html', {'categories': categories})
+    projects = Project.objects.select_related('category')
 
-def get_project_details(request, project_id):
-    try:
-        project = Project.objects.get(id=project_id)
-    except Project.DoesNotExist:
-        raise Http404("Projekt nie istnieje.")
+    return render(request, 'realizacje.html', {
+        'categories': categories,
+        'projects': projects,
+    })
 
-    data = {
-        'title': project.title,
-        'description': project.description,
-        'date': project.date.strftime("%Y-%m-%d"),
-        'main_image': project.main_image.url if project.main_image else None,
-        'images': [img.image.url for img in project.images.all() if img.image]
-    }
 
-    return JsonResponse(data)
+# ============================================================
+# REALIZACJE – PODGLĄD (preview.html)
+# ============================================================
 
 def preview_page(request, project_id, slug):
-    return render(request, 'preview.html')
+    project = get_object_or_404(Project, id=project_id, slug=slug)
+    return render(request, 'preview.html', {
+        'project': project
+    })
 
+
+# ============================================================
+# REALIZACJE – AJAX (jeśli używasz)
+# ============================================================
+
+def get_project_details(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
+
+    return JsonResponse({
+        'title': project.title,
+        'description': project.description,
+        'date': project.date.strftime('%Y-%m-%d'),
+        'main_image': project.main_image.url if project.main_image else None,
+        'images': [img.image.url for img in project.images.all()],
+    })
+
+
+# ============================================================
+# BLOG – LISTA WPISÓW
+# ============================================================
+
+def blog(request):
+    posts = BlogPost.objects.select_related('category').prefetch_related('tags')
+    categories = BlogCategory.objects.all()
+
+    return render(request, 'blog.html', {
+        'posts': posts,
+        'categories': categories,
+    })
+
+
+# ============================================================
+# BLOG – SZCZEGÓŁ WPISU
+# ============================================================
+
+def blog_post(request, slug):
+    post = get_object_or_404(BlogPost, slug=slug)
+    latest_posts = BlogPost.objects.exclude(id=post.id)[:3]
+
+    return render(request, 'blog_post.html', {
+        'post': post,
+        'latest_posts': latest_posts,
+    })

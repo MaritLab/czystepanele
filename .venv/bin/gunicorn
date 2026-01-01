@@ -1,4 +1,4 @@
-#!/home/deploy/sites/czystepanele_pl/.venv/bin/python3
+#!/Users/marcel/Desktop/praca/czystepanele_new/czystepanele/.venv/bin/python3.12
 import sys
 from gunicorn.app.wsgiapp import run
 if __name__ == '__main__':
