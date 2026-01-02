@@ -3,26 +3,18 @@
 # ======================
 __pycache__/
 *.py[cod]
-*$py.class
-
-# ======================
-# Virtualenv
-# ======================
-venv/
+*.log
 .env
-.env.*
+venv/
+.venv/
 
 # ======================
 # Django
 # ======================
-*.log
 db.sqlite3
+static/
 staticfiles/
 media/
-
-# migrations (opcjonalnie – patrz komentarz niżej)
-# */migrations/*
-# !*/migrations/__init__.py
 
 # ======================
 # IDE / OS
@@ -33,7 +25,7 @@ media/
 Thumbs.db
 
 # ======================
-# Testy / coverage
+# Tests / coverage
 # ======================
 .coverage
 htmlcov/
