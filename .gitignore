@@ -1,16 +1,44 @@
+# ======================
 # Python
+# ======================
 __pycache__/
 *.py[cod]
-*.sqlite3
+*$py.class
 
+# ======================
 # Virtualenv
-.venv/
+# ======================
 venv/
-
-# Django
-media/
-staticfiles/
 .env
+.env.*
 
-# OS
+# ======================
+# Django
+# ======================
+*.log
+db.sqlite3
+staticfiles/
+media/
+
+# migrations (opcjonalnie – patrz komentarz niżej)
+# */migrations/*
+# !*/migrations/__init__.py
+
+# ======================
+# IDE / OS
+# ======================
+.idea/
+.vscode/
 .DS_Store
+Thumbs.db
+
+# ======================
+# Testy / coverage
+# ======================
+.coverage
+htmlcov/
+
+# ======================
+# Gunicorn
+# ======================
+gunicorn.sock
